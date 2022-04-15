@@ -84,6 +84,8 @@ interface NormalizeErrorProps {
   taalOpcodes?: number[];
   windowLocationURL?: string;
   stackFrames: StackItemProps[];
+  events?: any[];
+  deferredSource?: any;
 }
 
 export {

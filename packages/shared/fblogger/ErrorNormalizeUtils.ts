@@ -2,7 +2,7 @@ import { Error2 } from "@farfetch/common/Error2";
 import { ErrorMetadata } from "@farfetch/common/ErrorMetadata";
 import { NormalizeErrorProps, StackItemProps } from "@farfetch/common/Types";
 import { toBeDefined, toBeEmpty, toBeNull } from "@farfetch/utils";
-import { getAll } from "@farfetch/utils/XFBDebug";
+import { getAll } from "./XFBDebug";
 import { getSimpleHash } from "@farfetch/utils/GetSimpleHash";
 import { performanceNow } from "@farfetch/utils/PerformanceNow";
 import { toReadableMessage } from "ErrorSerializer";
@@ -214,9 +214,9 @@ function normalizeError(error: Error2) {
     column: columnNumber ? String(columnNumber) : undefined,
     clientTime: Math.floor(Date.now() / 1e3),
     componentStackFrames: componentStackFrames,
-    // deferredSource: toBeDefined(error.deferredSource)
-    //   ? normalizeError(error.deferredSource!)
-    //   : null,
+    deferredSource: error.deferredSource
+      ? normalizeError(error.deferredSource!)
+      : null,
     extra: toBeDefined(extra) ? extra! : {},
     fbtrace_id: fbtrace_id ? fbtrace_id : undefined,
     guardList: guardList ? guardList! : [],
@@ -248,3 +248,5 @@ function normalizeError(error: Error2) {
     (obj[i] === null || obj[i] === undefined) && delete obj[i];
   return obj;
 }
+
+export { normalizeError, toReadableMessage };
