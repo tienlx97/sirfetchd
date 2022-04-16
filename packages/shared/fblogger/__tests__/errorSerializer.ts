@@ -1,5 +1,5 @@
-import { Error2 } from "@farfetch/common/Error2";
-import { ErrorProps } from "@farfetch/common/Types";
+import { Error2 } from "@farfetchd/common/Error2";
+import { ErrorProps } from "@farfetchd/common/Types";
 import { aggregateError } from "../ErrorSerializer";
 
 const error = new Error2(

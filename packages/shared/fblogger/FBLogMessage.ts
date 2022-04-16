@@ -1,10 +1,10 @@
-import { ErrorMetadata } from "@farfetch/common/ErrorMetadata";
+import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
 import { aggregateError, toStringParams } from "./ErrorSerializer";
 import { PREVIOUS_DIR, PREVIOUS_FILE, PREVIOUS_FRAME } from "./TAALOpcodes";
 import { normalizeError } from "./ErrorNormalizeUtils";
-import { LogTypeString, NormalizeErrorProps } from "@farfetch/common/Types";
+import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/Types";
 import { err } from "./Err";
-import { Error2 } from "@farfetch/common/Error2";
+import { Error2 } from "@farfetchd/common/Error2";
 import ErrorPubSub from "ErrorPubSub";
 
 class FBLogMessage {

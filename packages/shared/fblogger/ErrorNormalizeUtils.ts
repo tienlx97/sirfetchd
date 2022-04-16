@@ -1,10 +1,10 @@
-import { Error2 } from "@farfetch/common/Error2";
-import { ErrorMetadata } from "@farfetch/common/ErrorMetadata";
-import { NormalizeErrorProps, StackItemProps } from "@farfetch/common/Types";
-import { toBeDefined, toBeEmpty, toBeNull } from "@farfetch/utils";
+import { Error2 } from "@farfetchd/common/Error2";
+import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
+import { NormalizeErrorProps, StackItemProps } from "@farfetchd/common/Types";
+import { toBeDefined, toBeEmpty, toBeNull } from "@farfetchd/utils";
 import { getAll } from "./ErrorXFBDebug";
-import { getSimpleHash } from "@farfetch/utils/GetSimpleHash";
-import { performanceNow } from "@farfetch/utils/PerformanceNow";
+import { getSimpleHash } from "@farfetchd/utils/GetSimpleHash";
+import { performanceNow } from "@farfetchd/utils/PerformanceNow";
 import { toReadableMessage } from "ErrorSerializer";
 
 import { PREVIOUS_FRAME } from "TAALOpcodes";

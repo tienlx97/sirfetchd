@@ -1,7 +1,7 @@
-import { toBeTruthy } from "@farfetch/utils";
-import { ErrorProps, LogValue } from "@farfetch/common/Types";
-import { ErrorMetadata } from "@farfetch/common/ErrorMetadata";
-import { Error2 } from "@farfetch/common/Error2";
+import { toBeTruthy } from "@farfetchd/utils";
+import { ErrorProps, LogValue } from "@farfetchd/common/Types";
+import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
+import { Error2 } from "@farfetchd/common/Error2";
 
 function toStringParams(...args: any[]) {
   const newArgs = toBeTruthy(args) ? args : [];

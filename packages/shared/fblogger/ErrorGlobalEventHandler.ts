@@ -1,5 +1,5 @@
-import { Error2 } from "@farfetch/common/Error2";
-import { ErrorPubSubProps } from "@farfetch/common/Types";
+import { Error2 } from "@farfetchd/common/Error2";
+import { ErrorPubSubProps } from "@farfetchd/common/Types";
 import { err } from "Err";
 import { getErrorSafe } from "GetErrorSafe";
 

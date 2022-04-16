@@ -1,4 +1,4 @@
-import { toBeEmpty, toBeNotNull } from "@farfetch/utils/Expect";
+import { toBeEmpty, toBeNotNull } from "@farfetchd/utils/Expect";
 
 let globalMetaData: string[][] = [];
 

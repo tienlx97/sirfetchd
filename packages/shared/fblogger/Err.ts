@@ -1,6 +1,6 @@
 import { PREVIOUS_FRAME } from "./TAALOpcodes";
-import { toBeUndefined } from "@farfetch/utils/";
-import { Error2 } from "@farfetch/common/Error2";
+import { toBeUndefined } from "@farfetchd/utils/";
+import { Error2 } from "@farfetchd/common/Error2";
 
 function err(msg: string, ...agrs: any[]) {
   const error = new Error2(msg);

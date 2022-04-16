@@ -1,5 +1,5 @@
 {
-  "name": "@sirfetch/eslint-config",
+  "name": "@sirfetchd/eslint-config",
   "version": "1.0.0",
   "main": ".eslintrc.js",
   "license": "MIT",

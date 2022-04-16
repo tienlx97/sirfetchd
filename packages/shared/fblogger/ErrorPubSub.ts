@@ -1,9 +1,9 @@
-import { ErrorPubSubProps, NormalizeErrorProps } from "@farfetch/common/Types";
+import { ErrorPubSubProps, NormalizeErrorProps } from "@farfetchd/common/Types";
 import { errorListener } from "./ErrorBrowserConsole";
 import { cloneGuardList, findDeferredSource } from "./ErrorGuardState";
 import { normalizeError } from "./ErrorNormalizeUtils";
-import { removeFromArray } from "@farfetch/utils/RemoveFromArray";
-import { Error2 } from "@farfetch/common/Error2";
+import { removeFromArray } from "@farfetchd/utils/RemoveFromArray";
+import { Error2 } from "@farfetchd/common/Error2";
 let flag = false;
 const listeners: any = [];
 const gReact = "<global.react>";

@@ -1,5 +1,5 @@
 {
-  "name": "sirfetch",
+  "name": "sirfetchd",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Shinigami",
@@ -18,7 +18,7 @@
     "ts": "ts-node ./packages/shared/fblogger/src/index.ts"
   },
   "devDependencies": {
-    "@sirfetch/eslint-config": "*",
+    "@sirfetchd/eslint-config": "*",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
     "jest": "^27.5.1",

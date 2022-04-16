@@ -1,4 +1,4 @@
-import { Error2 } from "@farfetch/common/Error2";
+import { Error2 } from "@farfetchd/common/Error2";
 import { PREVIOUS_FRAME } from "TAALOpcodes";
 import { err } from "./Err";
 

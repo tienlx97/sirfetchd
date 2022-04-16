@@ -1,3 +1,3 @@
-const eslintConfig = require("@sirfetch/eslint-config");
+const eslintConfig = require("@sirfetchd/eslint-config");
 
 module.exports = eslintConfig;
