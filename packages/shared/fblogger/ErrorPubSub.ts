@@ -1,4 +1,4 @@
-import { NormalizeErrorProps } from "@farfetch/common/Types";
+import { ErrorPubSubProps, NormalizeErrorProps } from "@farfetch/common/Types";
 import { errorListener } from "./ErrorBrowserConsole";
 import { cloneGuardList, findDeferredSource } from "./ErrorGuardState";
 import { normalizeError } from "./ErrorNormalizeUtils";
@@ -8,16 +8,16 @@ let flag = false;
 const listeners: any = [];
 const gReact = "<global.react>";
 let fDSourse;
-const normalizeErrorArray: NormalizeErrorProps[] = [];
-const normalizeErrorArrayLength = 50;
+const normalizeErrorList: NormalizeErrorProps[] = [];
+const normalizeErrorListSize = 50;
 
-const history = normalizeErrorArray;
+const history = normalizeErrorList;
 
 const addListener = (listener: any, check?: any) => {
   check == undefined && (check = false),
     listeners.push(listener),
     check ||
-      normalizeErrorArray.forEach((nError) => {
+      normalizeErrorList.forEach((nError) => {
         return listener(
           nError,
           nError.loggingSource != undefined
@@ -54,9 +54,9 @@ const reportNormalizedError = (nError: NormalizeErrorProps) => {
     dSourse != null && (nError.deferredSource = normalizeError(dSourse));
   }
 
-  normalizeErrorArray.length > normalizeErrorArrayLength &&
-    normalizeErrorArray.splice(normalizeErrorArrayLength / 2, 1);
-  normalizeErrorArray.push(nError);
+  normalizeErrorList.length > normalizeErrorListSize &&
+    normalizeErrorList.splice(normalizeErrorListSize / 2, 1);
+  normalizeErrorList.push(nError);
   flag = true;
   for (let i = 0; i < listeners.length; i++)
     try {
@@ -70,12 +70,16 @@ const reportNormalizedError = (nError: NormalizeErrorProps) => {
 };
 
 addListener(errorListener);
-// b("ErrorGlobalEventHandler").setup(m);
-// b("ErrorUnhandledRejectionHandler").setup(m);
-export {
-  reportNormalizedError,
-  unshiftListener,
+
+const ErrorPubSub = {
+  addListener,
+  history,
   removeListener,
   reportError,
-  history,
-};
+  reportNormalizedError,
+  unshiftListener,
+} as ErrorPubSubProps;
+
+// b("ErrorGlobalEventHandler").setup(m);
+// b("ErrorUnhandledRejectionHandler").setup(m);
+export default ErrorPubSub;

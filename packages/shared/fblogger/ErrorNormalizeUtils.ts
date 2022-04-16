@@ -2,7 +2,7 @@ import { Error2 } from "@farfetch/common/Error2";
 import { ErrorMetadata } from "@farfetch/common/ErrorMetadata";
 import { NormalizeErrorProps, StackItemProps } from "@farfetch/common/Types";
 import { toBeDefined, toBeEmpty, toBeNull } from "@farfetch/utils";
-import { getAll } from "./XFBDebug";
+import { getAll } from "./ErrorXFBDebug";
 import { getSimpleHash } from "@farfetch/utils/GetSimpleHash";
 import { performanceNow } from "@farfetch/utils/PerformanceNow";
 import { toReadableMessage } from "ErrorSerializer";
@@ -16,6 +16,11 @@ const stackLineRegex = [
     /^at ([^\s\)\()]+):(\d+):(\d+)$/,
   ],
   symbolsRegex = /^\w+:\s.*?\n/g;
+
+Error.stackTraceLimit != null &&
+  Error.stackTraceLimit < 80 &&
+  (Error.stackTraceLimit = 80);
+
 /**
  * @example 
  * Error: Catching non-Error object is not supported

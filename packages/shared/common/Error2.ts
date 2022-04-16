@@ -24,7 +24,7 @@ class Error2 extends Error implements ErrorProps {
   sourceURL?: string;
   extra?: object;
   fbtrace_id?: string;
-  guardList?: [];
+  guardList?: string[];
   serverHash?: string;
   constructor(msg?: string) {
     super(msg);

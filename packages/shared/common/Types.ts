@@ -33,7 +33,7 @@ interface ErrorProps {
   sourceURL?: string;
   extra?: object;
   fbtrace_id?: string;
-  guardList?: [];
+  guardList?: string[];
   serverHash?: string;
 }
 
@@ -88,6 +88,15 @@ interface NormalizeErrorProps {
   deferredSource?: any;
 }
 
+interface ErrorPubSubProps {
+  addListener: (listener: any, check?: any) => void;
+  history: NormalizeErrorProps[];
+  removeListener: (a: any) => void;
+  reportError: (error: Error2) => void;
+  reportNormalizedError: (nError: NormalizeErrorProps) => boolean;
+  unshiftListener: (a: any) => void;
+}
+
 export {
   LogTypeString,
   LogValue,
@@ -95,4 +104,5 @@ export {
   SourceProps,
   StackItemProps,
   NormalizeErrorProps,
+  ErrorPubSubProps,
 };

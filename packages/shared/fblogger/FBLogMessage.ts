@@ -5,7 +5,7 @@ import { normalizeError } from "./ErrorNormalizeUtils";
 import { LogTypeString, NormalizeErrorProps } from "@farfetch/common/Types";
 import { err } from "./Err";
 import { Error2 } from "@farfetch/common/Error2";
-import { reportNormalizedError } from "ErrorPubSub";
+import ErrorPubSub from "ErrorPubSub";
 
 class FBLogMessage {
   project: string;
@@ -92,7 +92,7 @@ class FBLogMessage {
         (q = normalizeErrorObj.events).push.apply(q, events);
       } else normalizeErrorObj!.events = events;
     }
-    reportNormalizedError(normalizeErrorObj!);
+    ErrorPubSub.reportNormalizedError(normalizeErrorObj!);
     return error;
   }
 
