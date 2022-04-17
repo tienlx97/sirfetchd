@@ -8,20 +8,26 @@ let onError =
   errorPubSub: ErrorPubSubProps | null = null;
 
 function listener(errEvent: ErrorEvent) {
-  let b: Error2 =
+  let newError: Error2 =
     errEvent.error != null
       ? getErrorSafe(errEvent.error)
       : err(errEvent.message || "");
-  b.fileName == null &&
-    errEvent.filename != null &&
-    (b.fileName = errEvent.filename);
-  b.line == null && errEvent.lineno != null && (b.line = errEvent.lineno);
-  b.column == null && errEvent.colno != null && (b.column = errEvent.colno);
-  b.guardList = [onError];
-  b.loggingSource = "ONERROR";
+
+  if (newError.fileName == null && errEvent.filename != null)
+    newError.fileName = errEvent.filename;
+
+  if (newError.line == null && errEvent.lineno != null)
+    newError.line = errEvent.lineno;
+
+  if (newError.column == null && errEvent.colno != null)
+    newError.column = errEvent.colno;
+
+  newError.guardList = [onError];
+  newError.loggingSource = "ONERROR";
+
   errorPubSub === null || errorPubSub === undefined
     ? undefined
-    : errorPubSub.reportError(b);
+    : errorPubSub.reportError(newError);
 }
 
 function setup(ePubSub: ErrorPubSubProps) {
@@ -35,5 +41,5 @@ const ErrorGlobalEventHandler = {
   setup,
 };
 
-export default ErrorGlobalEventHandler;
 export { setup };
+export default ErrorGlobalEventHandler;

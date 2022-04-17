@@ -1,6 +1,6 @@
 import { Error2 } from "@farfetchd/common/Error2";
 import { ErrorProps } from "@farfetchd/common/Types";
-import { aggregateError } from "../ErrorSerializer";
+import ErrorSerializer from "../ErrorSerializer";
 
 const error = new Error2(
   "Network request encountered error HTTP HTTP_TRANSPORT_ERROR: "
@@ -41,4 +41,4 @@ const props = {
   type: "warn",
 } as ErrorProps;
 
-aggregateError(error, props);
+ErrorSerializer.aggregateError(error, props);

@@ -25,4 +25,13 @@ const findDeferredSource = () => {
   }
 };
 
+const ErrorGuardState = {
+  cloneGuardList,
+  findDeferredSource,
+  inGuard,
+  popGuard,
+  pushGuard,
+};
+
+export default ErrorGuardState;
 export { cloneGuardList, findDeferredSource, inGuard, popGuard, pushGuard };

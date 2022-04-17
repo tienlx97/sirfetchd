@@ -1,11 +1,16 @@
-import { ErrorPubSubProps, NormalizeErrorProps } from "@farfetchd/common/Types";
-import { errorListener } from "./ErrorBrowserConsole";
-import { cloneGuardList, findDeferredSource } from "./ErrorGuardState";
-import { normalizeError } from "./ErrorNormalizeUtils";
-import { removeFromArray } from "@farfetchd/utils/RemoveFromArray";
 import { Error2 } from "@farfetchd/common/Error2";
+import { ErrorPubSubProps, NormalizeErrorProps } from "@farfetchd/common/Types";
+import { removeFromArray } from "@farfetchd/utils/RemoveFromArray";
+
+import ErrorGuardState from "./ErrorGuardState";
+import ErrorBrowserConsole from "./ErrorBrowserConsole";
+import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
+
+import ErrorGlobalEventHandler from "./ErrorGlobalEventHandler";
+import ErrorUnhandledRejectionHandler from "./ErrorUnhandledRejectionHandler";
+
 let flag = false;
-const listeners: any = [];
+const listeners: FuncErrorPubSubListener[] = [];
 const gReact = "<global.react>";
 let fDSourse;
 const normalizeErrorList: NormalizeErrorProps[] = [];
@@ -13,22 +18,27 @@ const normalizeErrorListSize = 50;
 
 const history = normalizeErrorList;
 
-const addListener = (listener: any, check?: any) => {
+type FuncErrorPubSubListener = (
+  nError: NormalizeErrorProps,
+  loggingSource?: string
+) => any;
+
+const addListener = (listener: FuncErrorPubSubListener, check?: any) => {
   check == undefined && (check = false),
     listeners.push(listener),
     check ||
-      normalizeErrorList.forEach((nError) => {
-        return listener(
+      normalizeErrorList.forEach((nError) =>
+        listener(
           nError,
           nError.loggingSource != undefined
             ? nError.loggingSource
             : "DEPRECATED"
-        );
-      });
+        )
+      );
 };
 
-const unshiftListener = (a: any) => {
-  listeners.unshift(a);
+const unshiftListener = (listener: FuncErrorPubSubListener) => {
+  listeners.unshift(listener);
 };
 
 const removeListener = (a: any) => {
@@ -36,7 +46,7 @@ const removeListener = (a: any) => {
 };
 
 const reportError = (error: Error2) => {
-  const nError = normalizeError(error);
+  const nError = ErrorNormalizeUtils.normalizeError(error);
   reportNormalizedError(nError);
 };
 
@@ -45,13 +55,15 @@ const reportNormalizedError = (nError: NormalizeErrorProps) => {
     return false;
   }
 
-  const guardList = cloneGuardList();
+  const guardList = ErrorGuardState.cloneGuardList();
   nError.componentStackFrames && guardList.unshift(gReact);
 
   guardList.length > 0 && (nError.guardList = guardList);
   if (nError.deferredSource == null) {
-    const dSourse = fDSourse || (fDSourse = findDeferredSource());
-    dSourse != null && (nError.deferredSource = normalizeError(dSourse));
+    const dSourse =
+      fDSourse || (fDSourse = ErrorGuardState.findDeferredSource());
+    dSourse != null &&
+      (nError.deferredSource = ErrorNormalizeUtils.normalizeError(dSourse));
   }
 
   normalizeErrorList.length > normalizeErrorListSize &&
@@ -69,8 +81,6 @@ const reportNormalizedError = (nError: NormalizeErrorProps) => {
   return true;
 };
 
-addListener(errorListener);
-
 const ErrorPubSub = {
   addListener,
   history,
@@ -80,6 +90,47 @@ const ErrorPubSub = {
   unshiftListener,
 } as ErrorPubSubProps;
 
-// b("ErrorGlobalEventHandler").setup(m);
-// b("ErrorUnhandledRejectionHandler").setup(m);
+// QPLUserFlow
+// Bootloader
+addListener(ErrorBrowserConsole.errorListener);
+// ErrorGlobalEventHandler.setup(ErrorPubSub);
+// ErrorUnhandledRejectionHandler.setup(ErrorPubSub);
+
+// CometErrorLogging
+// SyntaxErrorMonitor
+// AdsLogger
+// AdsUnifiedLoggingLogger
+// CatalogBusinessEventsLoggerHelper
+// AdsInterfacesLoggerUtils
+// AppInstallLogger
+// ErrorMessageConsole
 export default ErrorPubSub;
+
+/*
+(h || (h = b("ErrorPubSub"))).unshiftListener(function(a) {
+        var b = [];
+        for (var c = t, d = Array.isArray(c), e = 0, c = d ? c : c[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"](); ; ) {
+            var f;
+            if (d) {
+                if (e >= c.length)
+                    break;
+                f = c[e++]
+            } else {
+                e = c.next();
+                if (e.done)
+                    break;
+                f = e.value
+            }
+            f = f;
+            var g = f[0];
+            f[1];
+            if (u.has(g))
+                continue;
+            f = N(g);
+            if (f.type === "csr" || f.type === "async")
+                continue;
+            b.push(f.src)
+        }
+        a.loadingUrls = b
+    });
+*/

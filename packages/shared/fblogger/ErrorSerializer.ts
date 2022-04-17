@@ -94,4 +94,11 @@ function aggregateError(error: Error2, props: ErrorProps) {
   error.forcedKey = errorForcedKey;
 }
 
+const ErrorSerializer = {
+  toStringParams,
+  toReadableMessage,
+  aggregateError,
+};
+
+export default ErrorSerializer;
 export { toStringParams, toReadableMessage, aggregateError };

@@ -1,7 +1,7 @@
 import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
-import { aggregateError, toStringParams } from "./ErrorSerializer";
+import ErrorSerializer from "./ErrorSerializer";
 import { PREVIOUS_DIR, PREVIOUS_FILE, PREVIOUS_FRAME } from "./TAALOpcodes";
-import { normalizeError } from "./ErrorNormalizeUtils";
+import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
 import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/Types";
 import { err } from "./Err";
 import { Error2 } from "@farfetchd/common/Error2";
@@ -45,7 +45,9 @@ class FBLogMessage {
 
       this.normalizedError.message = obj.message;
       this.normalizedError.messageFormat = obj.message;
-      this.normalizedError.messageParams = toStringParams(obj.params);
+      this.normalizedError.messageParams = ErrorSerializer.toStringParams(
+        obj.params
+      );
       this.normalizedError.project = project;
       this.normalizedError.type = type;
       this.normalizedError.loggingSource = "FBLOGGER";
@@ -55,16 +57,16 @@ class FBLogMessage {
           .blameToPreviousFrame()
           .blameToPreviousFrame()
           .warn("Blame helpers do not work with catching"),
-        aggregateError(error, {
+        ErrorSerializer.aggregateError(error, {
           messageFormat: messageFormat,
-          messageParams: toStringParams(params),
+          messageParams: ErrorSerializer.toStringParams(params),
           errorName: error.name,
           forcedKey,
           project,
           type,
           loggingSource: "FBLOGGER",
         }),
-        (normalizeErrorObj = normalizeError(error));
+        (normalizeErrorObj = ErrorNormalizeUtils.normalizeError(error));
     } else {
       error = new Error2(messageFormat);
       if (error.stack === undefined) {
@@ -73,7 +75,7 @@ class FBLogMessage {
         } catch (error) {}
       }
       error.messageFormat = messageFormat;
-      error.messageParams = toStringParams(params);
+      error.messageParams = ErrorSerializer.toStringParams(params);
       error.blameModule = blameModule;
       error.forcedKey = forcedKey;
       error.project = project;
@@ -82,7 +84,7 @@ class FBLogMessage {
       error.taalOpcodes = [PREVIOUS_FRAME, PREVIOUS_FRAME].concat(
         this.taalOpcodes
       );
-      normalizeErrorObj = normalizeError(error);
+      normalizeErrorObj = ErrorNormalizeUtils.normalizeError(error);
       normalizeErrorObj.name = "FBLogger";
     }
     metadata.isEmpty() || (normalizeErrorObj!.metadata = metadata.format());
@@ -166,8 +168,8 @@ class FBLogMessage {
     return this;
   }
 
-  addToCategoryKey(a: string) {
-    this.forcedKey = a;
+  addToCategoryKey(forcedKey: string) {
+    this.forcedKey = forcedKey;
     return this;
   }
 

@@ -254,4 +254,9 @@ function normalizeError(error: Error2) {
   return obj;
 }
 
-export { normalizeError, toReadableMessage };
+const ErrorNormalizeUtils = {
+  normalizeError,
+};
+
+export default ErrorNormalizeUtils;
+export { normalizeError };

@@ -2,11 +2,12 @@ import { Error2 } from "@farfetchd/common/Error2";
 import { ErrorPubSubProps } from "@farfetchd/common/Types";
 import { err } from "Err";
 import { getErrorSafe } from "./GetErrorSafe";
+
 let errorPubSub: ErrorPubSubProps | null = null,
   flag = false;
-function onunhandledrejection(a) {
+function onunhandledrejection(promiseRejectionEvent: PromiseRejectionEvent) {
   if (!errorPubSub) return;
-  var objError = a.reason,
+  var objError = promiseRejectionEvent.reason,
     error: Error2;
   if (
     objError != null &&
@@ -30,7 +31,7 @@ function onunhandledrejection(a) {
     (error = getErrorSafe(objError)),
       error.loggingSource || (error.loggingSource = "ONUNHANDLEDREJECTION");
   try {
-    objError = a.promise;
+    objError = promiseRejectionEvent.promise;
     error.stack =
       String(error.stack || "") +
       (objError != null && typeof objError.settledStack === "string"
@@ -41,7 +42,7 @@ function onunhandledrejection(a) {
         : "");
   } catch (a) {}
   errorPubSub.reportError(error);
-  a.preventDefault();
+  promiseRejectionEvent.preventDefault();
 }
 
 function setup(ePubSub: ErrorPubSubProps) {
@@ -52,9 +53,9 @@ function setup(ePubSub: ErrorPubSubProps) {
       window.addEventListener("unhandledrejection", onunhandledrejection));
 }
 
-const ErrorGlobalEventHandlerProps = {
+const ErrorGlobalEventHandler = {
   setup,
-  onunhandledrejection,
 };
 
-export default ErrorGlobalEventHandlerProps;
+export { setup };
+export default ErrorGlobalEventHandler;

@@ -58,7 +58,7 @@ interface NormalizeErrorProps {
   blameModule: string | null;
   column?: string;
   clientTime: number | null;
-  componentStackFrames?: StackItemProps[] | null;
+  componentStackFrames: StackItemProps[] | null;
   // deferredSource: Error2 | null;
   extra: object;
   fbtrace_id?: string;
@@ -86,15 +86,53 @@ interface NormalizeErrorProps {
   stackFrames: StackItemProps[];
   events?: any[];
   deferredSource?: any;
+  loadingUrls?: string[];
 }
 
 interface ErrorPubSubProps {
-  addListener: (listener: any, check?: any) => void;
+  addListener: (
+    listener: (nError: NormalizeErrorProps) => void,
+    check?: any
+  ) => void;
   history: NormalizeErrorProps[];
   removeListener: (a: any) => void;
   reportError: (error: Error2) => void;
   reportNormalizedError: (nError: NormalizeErrorProps) => boolean;
   unshiftListener: (a: any) => void;
+}
+
+interface ErrorPosterProp {
+  loggingFramework?: string;
+  script_path?: string;
+  appId?: string;
+  access_token?: string;
+  ancestor_hash?: string;
+  clientTime?: string;
+  column?: string;
+  line?: string;
+  componentStackFrames: StackItemProps[] | null;
+  events?: any[] | undefined;
+  extra: object;
+  frontend_env?: string;
+  site_category?: string;
+  forcedKey?: string;
+  guardList?: string[];
+  messageFormat?: string;
+  messageParams?: string[];
+  name?: string;
+  script?: string;
+  stackFrames?: StackItemProps[];
+  type?: LogTypeString;
+  project?: string;
+  taalOpcodes?: number[];
+  version: string;
+  xFBDebug?: string[];
+  blameModule?: string;
+  metadata?: string[];
+  loadingUrls?: string[];
+  serverHash?: string;
+  windowLocationURL?: string;
+  loggingSource?: string;
 }
 
 export {
@@ -105,4 +143,5 @@ export {
   StackItemProps,
   NormalizeErrorProps,
   ErrorPubSubProps,
+  ErrorPosterProp,
 };

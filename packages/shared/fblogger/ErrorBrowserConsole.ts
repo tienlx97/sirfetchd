@@ -3,7 +3,7 @@ import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/Types";
 let j = false;
 const console = window.console;
 
-const errorListener = (nError: NormalizeErrorProps) => {
+const errorListener = (nError: NormalizeErrorProps, loggingSource?: string) => {
   let logType = (
     console[nError.type!] ? nError.type : "error"
   ) as LogTypeString;
@@ -17,4 +17,9 @@ const errorListener = (nError: NormalizeErrorProps) => {
   }
 };
 
+const ErrorBrowserConsole = {
+  errorListener,
+};
+
+export default ErrorBrowserConsole;
 export { errorListener };

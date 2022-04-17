@@ -1,7 +1,8 @@
 import ErrorGlobalEventHandler from "./ErrorGlobalEventHandler";
 import ErrorPubSub from "./ErrorPubSub";
-
+import ErrorPoster from "./ErrorPoster";
 import ErrorUnhandledRejectionHandler from "./ErrorUnhandledRejectionHandler";
+import { ErrorPosterProp, NormalizeErrorProps } from "@farfetchd/common/Types";
 
 function preSetup(objSetup: any) {
   (objSetup == null || objSetup.ignoreOnError !== true) &&
@@ -10,8 +11,15 @@ function preSetup(objSetup: any) {
       ErrorUnhandledRejectionHandler.setup(ErrorPubSub);
 }
 
-// function setup() {
-//   ErrorPubSub.addListener(function (c) {
-//     ua.postError(c, a, b);
-//   });
-// }
+function setup(props: ErrorPosterProp, logFunc: any) {
+  ErrorPubSub.addListener((nError: NormalizeErrorProps) => {
+    ErrorPoster.postError(nError, props, logFunc);
+  });
+}
+
+const ErrorSetup = {
+  setup,
+  preSetup,
+};
+
+export default ErrorSetup;
