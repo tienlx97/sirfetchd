@@ -27,7 +27,7 @@ class FBLogMessage {
     this.taalOpcodes = [];
   }
 
-  $1(type: LogTypeString, msgFormat: string, ...params) {
+  $1(type: LogTypeString, msgFormat: string, ...params: any) {
     const messageFormat = String(msgFormat);
     const { events, project, metadata, blameModule, forcedKey } = this;
     let error = this.error;
@@ -101,19 +101,19 @@ class FBLogMessage {
     return error;
   }
 
-  fatal = (msg: string, ...params) => {
+  fatal = (msg: string, ...params: any) => {
     this.$1("fatal", msg, ...params);
   };
 
-  mustfix = (msg: string, ...params) => {
+  mustfix = (msg: string, ...params: any) => {
     this.$1("error", msg, ...params);
   };
 
-  warn = (msg: string, ...params) => {
+  warn = (msg: string, ...params: any) => {
     this.$1("warn", msg, ...params);
   };
 
-  info = (msg: string, ...params) => {
+  info = (msg: string, ...params: any) => {
     this.$1("info", msg, ...params);
   };
 
@@ -121,7 +121,7 @@ class FBLogMessage {
     /** */
   }
 
-  mustfixThrow(msg: string, ...params) {
+  mustfixThrow(msg: string, ...params: any) {
     let error = this.$1("error", msg, params);
     error ||
       ((error = err("mustfixThrow does not support catchingNormalizedError")),

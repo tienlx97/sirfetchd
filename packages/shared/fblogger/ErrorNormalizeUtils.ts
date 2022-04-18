@@ -130,10 +130,10 @@ function splitStack(stack: string | null): StackItemProps[] {
     .map((str) => splitStackLine(str));
 }
 
-function componentStackUtils(componentStack: string | undefined) {
-  if (componentStack != undefined || expect.toBeEmpty(componentStack!))
+function componentStackUtils(componentStack?: string) {
+  if (componentStack == undefined || expect.toBeEmpty(componentStack!))
     return null;
-  const items = componentStack!.split("\n");
+  const items = componentStack.split("\n");
   items.splice(0, 1);
   return items.map((item) => item.trim());
 }

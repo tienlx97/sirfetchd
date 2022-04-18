@@ -1,8 +1,8 @@
 import { expect } from "@farfetchd/utils";
 import { ErrorProps, LogValue, Error2, ErrorMetadata } from "@farfetchd/common";
 
-function toStringParams(...args: any[]) {
-  const newArgs = expect.toBeTruthy(args) ? args : [];
+function toStringParams(args: any[]) {
+  const newArgs = args != undefined ? args : [];
   return newArgs.map((arg) => String(arg));
 }
 
@@ -51,7 +51,7 @@ function aggregateError(error: Error2, props: ErrorProps) {
   } = props;
 
   if (metadata != undefined) {
-    let errMetadata =
+    const errMetadata =
       error.metadata != undefined ? error.metadata : new ErrorMetadata();
 
     metadata != undefined && errMetadata.addEntries(...metadata!.getAll());
@@ -73,6 +73,7 @@ function aggregateError(error: Error2, props: ErrorProps) {
 
   if (messageFormat != undefined && messageFormat !== errorMessageFormat) {
     errorMessageFormat += " [Caught in: " + messageFormat + "]";
+    // eslint-disable-next-line prefer-spread
     errorMessageParams.push.apply(
       errorMessageParams,
       messageParams != undefined && messageParams

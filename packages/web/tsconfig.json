@@ -2,15 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react",
-    "typeRoots": ["../../node_modules/@types", "./src/types"],
-    "target": "es6",
-    "lib": [
-      "es6",
-      "dom",
-      "es2016.array.include",
-      "es2017.object",
-      "es2017.intl"
-    ]
+    "typeRoots": ["../../node_modules/@types", "./src/@types"]
   },
   "include": ["./src"],
   "exclude": ["./webpack,**/node_modules"]
