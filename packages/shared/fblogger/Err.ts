@@ -1,10 +1,10 @@
 import { PREVIOUS_FRAME } from "./TAALOpcodes";
-import { toBeUndefined } from "@farfetchd/utils/";
-import { Error2 } from "@farfetchd/common/Error2";
+import { expect } from "@farfetchd/utils";
+import { Error2 } from "@farfetchd/common";
 
 function err(msg: string, ...agrs: any[]) {
   const error = new Error2(msg);
-  if (toBeUndefined(error.stack))
+  if (expect.toBeUndefined(error.stack))
     try {
       throw error;
     } catch (a) {}

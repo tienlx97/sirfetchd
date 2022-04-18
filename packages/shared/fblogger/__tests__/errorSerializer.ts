@@ -1,5 +1,4 @@
-import { Error2 } from "@farfetchd/common/Error2";
-import { ErrorProps } from "@farfetchd/common/Types";
+import { ErrorProps, Error2 } from "@farfetchd/common";
 import ErrorSerializer from "./../ErrorSerializer";
 
 const error = new Error2(

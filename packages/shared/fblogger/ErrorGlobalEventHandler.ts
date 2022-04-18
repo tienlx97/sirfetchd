@@ -1,7 +1,6 @@
-import { Error2 } from "@farfetchd/common/Error2";
-import { ErrorPubSubProps } from "@farfetchd/common/Types";
+import { ErrorPubSubProps, Error2 } from "@farfetchd/common";
 import { err } from "./Err";
-import { getErrorSafe } from "./GetErrorSafe";
+import { getErrorSafe } from "./getErrorSafe";
 
 let onError =
     typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>",

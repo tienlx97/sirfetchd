@@ -2,7 +2,7 @@ import {
   ErrorPosterProp,
   NormalizeErrorProps,
   StackItemProps,
-} from "@farfetchd/common/Types";
+} from "@farfetchd/common";
 import ErrorFilter from "./ErrorFilter";
 
 var l = {

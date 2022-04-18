@@ -1,4 +1,4 @@
-import { Error2 } from "@farfetchd/common/Error2";
+import { Error2 } from "@farfetchd/common";
 import { PREVIOUS_DIR, PREVIOUS_FILE, PREVIOUS_FRAME } from "./TAALOpcodes";
 
 const taalOpcodesValue = (taalOpcodes: number[] | undefined) =>

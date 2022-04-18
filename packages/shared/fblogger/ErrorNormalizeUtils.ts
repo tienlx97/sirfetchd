@@ -1,6 +1,9 @@
-import { Error2 } from "@farfetchd/common/Error2";
-import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
-import { NormalizeErrorProps, StackItemProps } from "@farfetchd/common/Types";
+import {
+  NormalizeErrorProps,
+  StackItemProps,
+  ErrorMetadata,
+  Error2,
+} from "@farfetchd/common";
 import { expect, performanceNow, getSimpleHash } from "@farfetchd/utils";
 import { getAll } from "./ErrorXFBDebug";
 import { toReadableMessage } from "./ErrorSerializer";

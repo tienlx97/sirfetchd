@@ -1,4 +1,4 @@
-import { expect } from "@farfetchd/utils/";
+import { expect } from "@farfetchd/utils";
 
 let globalMetaData: string[][] = [];
 
@@ -62,4 +62,5 @@ class ErrorMetadata {
   }
 }
 
+export default ErrorMetadata;
 export { ErrorMetadata };

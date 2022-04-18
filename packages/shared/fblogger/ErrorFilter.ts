@@ -1,4 +1,4 @@
-import { NormalizeErrorProps } from "@farfetchd/common/Types";
+import { NormalizeErrorProps } from "@farfetchd/common";
 import { performanceNow } from "@farfetchd/utils";
 
 interface ErrorFilterProp {

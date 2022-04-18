@@ -31,4 +31,5 @@ class Error2 extends Error implements ErrorProps {
   }
 }
 
+export default Error2;
 export { Error2 };

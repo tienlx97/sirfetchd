@@ -2,7 +2,7 @@ import ErrorGlobalEventHandler from "./ErrorGlobalEventHandler";
 import ErrorPubSub from "./ErrorPubSub";
 import ErrorPoster from "./ErrorPoster";
 import ErrorUnhandledRejectionHandler from "./ErrorUnhandledRejectionHandler";
-import { ErrorPosterProp, NormalizeErrorProps } from "@farfetchd/common/Types";
+import { ErrorPosterProp, NormalizeErrorProps } from "@farfetchd/common";
 
 function preSetup(objSetup: any) {
   (objSetup == null || objSetup.ignoreOnError !== true) &&
