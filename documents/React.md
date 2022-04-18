@@ -44,3 +44,5 @@ To build this version;
 - Run `yarn add @types/react @types/react-dom` if use Typescript
 
 Never do this if you don't need any of some extras unstable APIs that's listed above.
+
+[Thanks to mr Cong Nguyen](https://github.com/ladifire-opensource/react-experimental-custom)
