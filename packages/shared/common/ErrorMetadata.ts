@@ -27,7 +27,7 @@ class ErrorMetadata {
   }
 
   format() {
-    let fm: string[] = [];
+    const fm: string[] = [];
     this.metadata.forEach((arr) => {
       if (arr && arr.length) {
         const filter = arr

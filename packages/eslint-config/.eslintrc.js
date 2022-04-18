@@ -6,24 +6,25 @@ module.exports = {
     jest: true,
   },
   extends: [
-    "plugin:react/recommended",
-    "standard",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/standard",
-    "prettier/react",
+    // "plugin:react/recommended",
+    // "standard",
+    "plugin:@typescript-eslint/eslint-recommended",
+    // "prettier/@typescript-eslint",
+    // "prettier/standard",
+    // "prettier/react",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 11,
+    // ecmaVersion: 11,
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
-    "prettier/prettier": "error",
+    // "prettier/prettier": "error",
   },
   settings: {
     "import/resolver": {
