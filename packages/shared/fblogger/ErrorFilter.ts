@@ -1,5 +1,5 @@
 import { NormalizeErrorProps } from "@farfetchd/common/Types";
-import { performanceNow } from "@farfetchd/utils/PerformanceNow";
+import { performanceNow } from "@farfetchd/utils";
 
 interface ErrorFilterProp {
   dropped: number;

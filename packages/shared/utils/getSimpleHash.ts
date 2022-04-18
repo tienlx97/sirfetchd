@@ -15,4 +15,5 @@ function getSimpleHash(...args: any[]) {
   return j;
 }
 
+export default getSimpleHash;
 export { getSimpleHash };

@@ -1,4 +1,4 @@
-import FBLogMessage from "FBLogMessage";
+import FBLogMessage from "./FBLogMessage";
 
 function FBLogger(projectName: string, occurAt?: string) {
   const fbLogMessage = new FBLogMessage(projectName);

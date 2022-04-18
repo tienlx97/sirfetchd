@@ -1,5 +1,5 @@
 import { Error2 } from "@farfetchd/common/Error2";
-import FBLogger from "FBLogger";
+import FBLogger from "./FBLogger";
 
 function unrecoverableViolation(
   msg: string,

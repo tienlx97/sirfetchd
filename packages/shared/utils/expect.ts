@@ -31,6 +31,23 @@ const toBeLessThanOrEqual = (
   expected: number | bigint
 ) => received <= expected;
 
+const expect = {
+  toBeDefined,
+  toBeUndefined,
+  toBeNull,
+  toBeNaN,
+  toBeTruthy,
+  toBeFalsy,
+  toBeInstanceOf,
+  toBeLessThan,
+  toBeLessThanOrEqual,
+  toBeNotNull,
+  toBeEmpty,
+  toBeDefinedAndNotNull,
+  toBeUndefinedOrNull,
+};
+
+export default expect;
 export {
   toBeDefined,
   toBeUndefined,

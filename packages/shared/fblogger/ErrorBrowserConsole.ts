@@ -1,4 +1,4 @@
-import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/Types";
+import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/";
 
 let j = false;
 const console = window.console;

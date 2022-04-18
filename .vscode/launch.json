@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Current TS File",
+      "name": "Debug TS File",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "node",

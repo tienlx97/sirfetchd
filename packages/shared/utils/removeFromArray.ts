@@ -3,4 +3,5 @@ function removeFromArray<T>(arr: T[], value: T) {
   if (index !== -1) return arr.splice(index, 1);
 }
 
+export default removeFromArray;
 export { removeFromArray };

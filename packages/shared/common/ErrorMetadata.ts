@@ -1,4 +1,4 @@
-import { toBeEmpty, toBeNotNull } from "@farfetchd/utils/Expect";
+import { expect } from "@farfetchd/utils/";
 
 let globalMetaData: string[][] = [];
 
@@ -19,7 +19,7 @@ class ErrorMetadata {
   }
 
   isEmpty() {
-    return toBeEmpty(this.metadata.length);
+    return expect.toBeEmpty(this.metadata.length);
   }
 
   clearEntries() {
@@ -32,7 +32,9 @@ class ErrorMetadata {
       if (arr && arr.length) {
         const filter = arr
           .map((value) => {
-            return toBeNotNull(value) ? String(value).replace(/:/g, "_") : "";
+            return expect.toBeNotNull(value)
+              ? String(value).replace(/:/g, "_")
+              : "";
           })
           .join(":");
         fm.push(filter);

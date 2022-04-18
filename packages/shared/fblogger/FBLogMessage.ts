@@ -5,7 +5,7 @@ import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
 import { LogTypeString, NormalizeErrorProps } from "@farfetchd/common/Types";
 import { err } from "./Err";
 import { Error2 } from "@farfetchd/common/Error2";
-import ErrorPubSub from "ErrorPubSub";
+import ErrorPubSub from "./ErrorPubSub";
 
 class FBLogMessage {
   project: string;

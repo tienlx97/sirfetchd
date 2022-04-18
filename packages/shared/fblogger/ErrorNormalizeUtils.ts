@@ -1,13 +1,11 @@
 import { Error2 } from "@farfetchd/common/Error2";
 import { ErrorMetadata } from "@farfetchd/common/ErrorMetadata";
 import { NormalizeErrorProps, StackItemProps } from "@farfetchd/common/Types";
-import { toBeDefined, toBeEmpty, toBeNull } from "@farfetchd/utils";
+import { expect, performanceNow, getSimpleHash } from "@farfetchd/utils";
 import { getAll } from "./ErrorXFBDebug";
-import { getSimpleHash } from "@farfetchd/utils/GetSimpleHash";
-import { performanceNow } from "@farfetchd/utils/PerformanceNow";
-import { toReadableMessage } from "ErrorSerializer";
+import { toReadableMessage } from "./ErrorSerializer";
 
-import { PREVIOUS_FRAME } from "TAALOpcodes";
+import { PREVIOUS_FRAME } from "./TAALOpcodes";
 
 const stackLineRegex = [
     /\(([^\s\)\()]+):(\d+):(\d+)\)$/,
@@ -42,7 +40,7 @@ function removeFirstMessageStack(error: Error2): string | null {
 
   if (stack == undefined) return null;
 
-  if (name != null && message != null && !toBeEmpty(stack)) {
+  if (name != null && message != null && !expect.toBeEmpty(stack)) {
     const errorNameMessage = name + ": " + message + "\n";
     if (stack.startsWith(errorNameMessage)) {
       return stack.substring(errorNameMessage.length);
@@ -58,7 +56,7 @@ function removeFirstMessageStack(error: Error2): string | null {
     }
   }
 
-  if (message != null && !toBeEmpty(message)) {
+  if (message != null && !expect.toBeEmpty(message)) {
     const errorMessage = ": " + message + "\n";
     const index = stack.indexOf(errorMessage);
     const remainStack = stack!.substring(0, index);
@@ -120,7 +118,7 @@ function splitStackLine(str: string): StackItemProps {
 }
 
 function splitStack(stack: string | null): StackItemProps[] {
-  if (stack == null || toBeEmpty(stack)) {
+  if (stack == null || expect.toBeEmpty(stack)) {
     return [];
   }
   return stack
@@ -130,7 +128,8 @@ function splitStack(stack: string | null): StackItemProps[] {
 }
 
 function componentStackUtils(componentStack: string | undefined) {
-  if (componentStack != undefined || toBeEmpty(componentStack!)) return null;
+  if (componentStack != undefined || expect.toBeEmpty(componentStack!))
+    return null;
   const items = componentStack!.split("\n");
   items.splice(0, 1);
   return items.map((item) => item.trim());
@@ -222,7 +221,7 @@ function normalizeError(error: Error2) {
     deferredSource: error.deferredSource
       ? normalizeError(error.deferredSource!)
       : null,
-    extra: toBeDefined(extra) ? extra! : {},
+    extra: expect.toBeDefined(extra) ? extra! : {},
     fbtrace_id: fbtrace_id ? fbtrace_id : undefined,
     guardList: guardList ? guardList! : [],
     hash: getSimpleHash(errorName, stack, type, project, loggingSource),

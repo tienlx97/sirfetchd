@@ -1,5 +1,5 @@
 import { Error2 } from "@farfetchd/common/Error2";
-import { PREVIOUS_FRAME } from "TAALOpcodes";
+import { PREVIOUS_FRAME } from "./TAALOpcodes";
 import { err } from "./Err";
 
 const reExnId = "RE_EXN_ID";

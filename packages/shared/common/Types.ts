@@ -87,6 +87,7 @@ interface NormalizeErrorProps {
   events?: any[];
   deferredSource?: any;
   loadingUrls?: string[];
+  errorType?: string;
 }
 
 interface ErrorPubSubProps {

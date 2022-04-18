@@ -3,6 +3,8 @@ declare global {
     msPerformance: any;
     webkitPerformance: any;
     mozPerformance: any;
-    _cstart: Date;
+    _cstart: Date = new Date();
   }
 }
+
+export {};

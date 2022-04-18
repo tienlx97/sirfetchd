@@ -15,7 +15,7 @@
   "scripts": {
     "test": "jest --coverage",
     "jdebug": "node --inspect-brk node_modules/.bin/jest --runInBand -i",
-    "ts": "ts-node ./packages/shared/fblogger/src/index.ts"
+    "ts": "ts-node  ./packages/shared/fblogger/__tests__/fblogger.test.ts"
   },
   "devDependencies": {
     "@sirfetchd/eslint-config": "*",
