@@ -1,0 +1,17 @@
+{
+  "name": "@farfetchd/common",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@farfetchd/utils": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lexuantien/sirfetchd.git",
+    "directory": "packages/shared/common"
+  }
+}
