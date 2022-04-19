@@ -5,8 +5,8 @@ import ErrorGuardState from "./ErrorGuardState";
 import ErrorPubSub from "./ErrorPubSub";
 import { NormalizeErrorProps, Error2 } from "@farfetchd/common";
 
-var oa = "<anonymous guard>";
-var guardGlobalFlag = !1;
+const oa = "<anonymous guard>";
+let guardGlobalFlag = !1;
 
 function applyWithGuard(a, b, c, nError: NormalizeErrorProps) {
   ErrorGuardState.pushGuard({
@@ -30,10 +30,10 @@ function applyWithGuard(a, b, c, nError: NormalizeErrorProps) {
   } catch (h) {
     try {
       b = nError !== null && nError !== void 0 ? nError : {};
-      var e = b.deferredSource,
-        f = b.onError;
+      let e = b.deferredSource;
+      const f = b.onError;
       b = b.onNormalizedError;
-      let sError: Error2 = getErrorSafe(h);
+      const sError: Error2 = getErrorSafe(h);
       e = {
         deferredSource: e,
         loggingSource: "GUARDED",
@@ -64,10 +64,8 @@ function applyWithGuard(a, b, c, nError: NormalizeErrorProps) {
 }
 
 function guard(a: any, b: any) {
-  function c() {
-    for (var c = arguments.length, d = new Array(c), e = 0; e < c; e++)
-      d[e] = arguments[e];
-    return applyWithGuard(a, this, d, b);
+  function c(...args) {
+    return applyWithGuard(a, this, args, b);
   }
   a.__SMmeta && (c.__SMmeta = a.__SMmeta);
   return c;

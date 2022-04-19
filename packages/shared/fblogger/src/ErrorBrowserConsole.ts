@@ -4,7 +4,7 @@ let j = false;
 const console = window.console;
 
 const errorListener = (nError: NormalizeErrorProps, loggingSource?: string) => {
-  let logType = (
+  const logType = (
     console[nError.type!] ? nError.type : "error"
   ) as LogTypeString;
   if (nError.type === "fatal" || (logType === "error" && !j)) {

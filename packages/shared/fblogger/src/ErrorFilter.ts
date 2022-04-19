@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { NormalizeErrorProps } from "@farfetchd/common";
 import { performanceNow } from "@farfetchd/utils";
 
@@ -7,19 +8,20 @@ interface ErrorFilterProp {
   lastAccessed: number;
 }
 
-var performance: number = 0,
-  m = 6,
+let performance: number = 0;
+let m = 6,
   n = 6e4,
   o = 10 * n,
-  p = new Map<string, ErrorFilterProp>(),
   q = 0;
 
+const p = new Map<string, ErrorFilterProp>();
+
 function r() {
-  var a = performance || (performance = performanceNow());
+  const a = performance || (performance = performanceNow());
   if (a > q + n) {
     const c = a - o;
     for (
-      var isArray = Array.isArray(p),
+      let isArray = Array.isArray(p),
         f: any = 0,
         interator = isArray
           ? p
@@ -37,7 +39,7 @@ function r() {
         h = f.value;
       }
       h = h;
-      var i = h[0];
+      const i = h[0];
       h = h[1];
       h.lastAccessed < c && p["delete"](i);
     }
@@ -47,7 +49,7 @@ function r() {
 
 function s(hash: string) {
   r();
-  var c = performance || (performance = performanceNow()),
+  const c = performance || (performance = performanceNow()),
     d: ErrorFilterProp | undefined = p.get(hash);
   if (d == null) {
     p.set(hash, {

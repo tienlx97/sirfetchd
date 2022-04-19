@@ -2,6 +2,7 @@ const g = "abcdefghijklmnopqrstuvwxyz012345";
 
 function getSimpleHash(...args: any[]) {
   let a = 0;
+  // eslint-disable-next-line no-var
   for (var b = args.length, c = new Array(b), d = 0; d < b; d++) c[d] = args[d];
   for (let e = 0; e < c.length; e++) {
     const f = c[e];

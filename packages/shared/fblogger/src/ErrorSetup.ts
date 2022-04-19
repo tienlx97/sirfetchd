@@ -4,7 +4,7 @@ import ErrorPoster from "./ErrorPoster";
 import ErrorUnhandledRejectionHandler from "./ErrorUnhandledRejectionHandler";
 import { ErrorPosterProp, NormalizeErrorProps } from "@farfetchd/common";
 
-function preSetup(objSetup: any) {
+function preSetup(objSetup?: any) {
   (objSetup == null || objSetup.ignoreOnError !== true) &&
     ErrorGlobalEventHandler.setup(ErrorPubSub),
     (objSetup == null || objSetup.ignoreOnUnahndledRejection !== true) &&

@@ -5,7 +5,7 @@ import { err } from "./Err";
 const reExnId = "RE_EXN_ID";
 
 function getErrorSafe(obj: Error2 | any): Error2 {
-  var newErr: Error2 | null = null;
+  let newErr: Error2 | null = null;
 
   if (obj == null || typeof obj !== "object") {
     newErr = err("Non-object thrown: %s", String(obj));

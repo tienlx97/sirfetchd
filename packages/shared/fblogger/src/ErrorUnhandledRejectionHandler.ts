@@ -6,8 +6,8 @@ let errorPubSub: ErrorPubSubProps | null = null,
   flag = false;
 function onunhandledrejection(promiseRejectionEvent: PromiseRejectionEvent) {
   if (!errorPubSub) return;
-  var objError = promiseRejectionEvent.reason,
-    error: Error2;
+  let objError = promiseRejectionEvent.reason;
+  let error: Error2;
   if (
     objError != null &&
     typeof objError === "object" &&
@@ -49,7 +49,9 @@ function setup(ePubSub: ErrorPubSubProps) {
     typeof window.addEventListener === "function" &&
       !flag &&
       ((flag = true),
-      window.addEventListener("unhandledrejection", onunhandledrejection));
+      window.addEventListener("unhandledrejection", (e) =>
+        onunhandledrejection(e)
+      ));
 }
 
 const ErrorGlobalEventHandler = {

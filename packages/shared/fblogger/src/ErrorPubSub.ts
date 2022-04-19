@@ -92,9 +92,6 @@ const ErrorPubSub = {
 
 // QPLUserFlow
 // Bootloader
-addListener(ErrorBrowserConsole.errorListener);
-// ErrorGlobalEventHandler.setup(ErrorPubSub);
-// ErrorUnhandledRejectionHandler.setup(ErrorPubSub);
 
 // CometErrorLogging
 // SyntaxErrorMonitor
@@ -105,32 +102,3 @@ addListener(ErrorBrowserConsole.errorListener);
 // AppInstallLogger
 // ErrorMessageConsole
 export default ErrorPubSub;
-
-/*
-(h || (h = b("ErrorPubSub"))).unshiftListener(function(a) {
-        var b = [];
-        for (var c = t, d = Array.isArray(c), e = 0, c = d ? c : c[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"](); ; ) {
-            var f;
-            if (d) {
-                if (e >= c.length)
-                    break;
-                f = c[e++]
-            } else {
-                e = c.next();
-                if (e.done)
-                    break;
-                f = e.value
-            }
-            f = f;
-            var g = f[0];
-            f[1];
-            if (u.has(g))
-                continue;
-            f = N(g);
-            if (f.type === "csr" || f.type === "async")
-                continue;
-            b.push(f.src)
-        }
-        a.loadingUrls = b
-    });
-*/

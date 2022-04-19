@@ -2,12 +2,12 @@ import { ErrorPubSubProps, Error2 } from "@farfetchd/common";
 import { err } from "./Err";
 import { getErrorSafe } from "./getErrorSafe";
 
-let onError =
-    typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>",
-  errorPubSub: ErrorPubSubProps | null = null;
+const onError =
+  typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>";
+let errorPubSub: ErrorPubSubProps | null = null;
 
 function listener(errEvent: ErrorEvent) {
-  let newError: Error2 =
+  const newError: Error2 =
     errEvent.error != null
       ? getErrorSafe(errEvent.error)
       : err(errEvent.message || "");
@@ -33,7 +33,7 @@ function setup(ePubSub: ErrorPubSubProps) {
   if (typeof window.addEventListener !== "function") return;
   if (errorPubSub != null) return;
   errorPubSub = ePubSub;
-  window.addEventListener("error", listener);
+  window.addEventListener("error", (e) => listener(e));
 }
 
 const ErrorGlobalEventHandler = {

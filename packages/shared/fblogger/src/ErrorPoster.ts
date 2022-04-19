@@ -5,10 +5,11 @@ import {
 } from "@farfetchd/common";
 import ErrorFilter from "./ErrorFilter";
 
-var l = {
-    access_token: undefined,
-  },
-  V: 1024;
+const l = {
+  access_token: undefined,
+};
+
+let V: 1024;
 
 function toString(val: unknown) {
   return String(val);
@@ -19,7 +20,7 @@ function toStringNotNull(val?: unknown) {
 }
 
 function eventsDiff(nErrorExtra: any, propsExtra: any) {
-  var c = {};
+  const c = {};
   propsExtra &&
     propsExtra.forEach((a) => {
       c[a] = true;
@@ -84,7 +85,7 @@ function createErrorPayload(
     xFBDebug: nError.xFBDebug,
   };
 
-  var d = nError.deferredSource;
+  const d = nError.deferredSource;
   nError.blameModule != null && (obj.blameModule = String(nError.blameModule));
   nError.deferredSource &&
     nError.deferredSource.stackFrames &&
@@ -100,6 +101,7 @@ function createErrorPayload(
   return obj;
 }
 
+// Post here
 function postError(
   nError: NormalizeErrorProps,
   props: ErrorPosterProp,
