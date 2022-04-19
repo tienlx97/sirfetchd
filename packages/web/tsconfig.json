@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react",
-    "typeRoots": ["../../node_modules/@types", "./src/@types"]
+    "typeRoots": ["../../node_modules/@types", "./src/@types"],
+    "allowJs": true,
+    "checkJs": false
   },
   "include": ["./src"],
   "exclude": ["./webpack,**/node_modules"]

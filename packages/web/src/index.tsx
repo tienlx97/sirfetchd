@@ -1,12 +1,12 @@
 import { ErrorPubSub, ErrorBrowserConsole, ErrorSetup } from "@farfetchd/fblogger";
-import React, { useState } from "@farfetchd-lib/react";
-import { createRoot } from "@farfetchd-lib/react-dom";
+const React = require("react");
+const ReactDOM = require("react-dom");
 
 ErrorPubSub.addListener(ErrorBrowserConsole.errorListener)
 ErrorSetup.preSetup();
 
 function Counter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = React.useState(0);
   return (
     <>
       <h1>{count}</h1>
@@ -15,5 +15,5 @@ function Counter() {
   );
 }
 
-const root = createRoot(document.getElementById("root")!);
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<Counter />);

@@ -54,8 +54,8 @@
     "webpack-obfuscator": "^3.5.1"
   },
   "dependencies": {
-    "@farfetchd-lib/react": "*",
-    "@farfetchd-lib/react-dom": "*",
+    "react": "*",
+    "react-dom": "*",
     "@farfetchd/fblogger": "*",
     "@ladifire-opensource/stylex": "^0.1.0-beta.0",
     "@ladifire-opensource/stylex-webpack-plugin": "^0.1.0-beta.0",
