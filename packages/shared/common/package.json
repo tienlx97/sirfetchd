@@ -8,5 +8,10 @@
   },
   "dependencies": {
     "@farfetchd/utils": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lexuantien/sirfetchd.git",
+    "directory": "packages/shared/common"
   }
 }

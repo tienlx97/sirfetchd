@@ -6,5 +6,10 @@
   "dependencies": {
     "@farfetchd-lib/react": "*",
     "scheduler": "^0.21.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lexuantien/sirfetchd.git",
+    "directory": "packages/lib/react-dom"
   }
 }
