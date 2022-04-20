@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
   mode?: string;
   suppressHydrationWarning?: boolean,
-  htmlAttributes: {}
+  htmlAttributes: any
 }
 
 const legacyHidden = (props: Props, ref: Ref<HTMLDivElement>) => {
@@ -16,7 +16,7 @@ const legacyHidden = (props: Props, ref: Ref<HTMLDivElement>) => {
 
   return (
     <div
-      {...Object.assign(htmlAttributes, {
+      {...Object.assign({}, htmlAttributes, {
         hidden: mode === "hidden" ? true : undefined,
         ref,
         suppressHydrationWarning,

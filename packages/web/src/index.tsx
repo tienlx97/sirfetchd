@@ -1,19 +1,8 @@
-import { ErrorPubSub, ErrorBrowserConsole, ErrorSetup } from "@farfetchd/fblogger";
-const React = require("react");
+import React from "react";
+// const React = require("react");
 const ReactDOM = require("react-dom");
 
-ErrorPubSub.addListener(ErrorBrowserConsole.errorListener)
-ErrorSetup.preSetup();
-
-function Counter() {
-  const [count, setCount] = React.useState(0);
-  return (
-    <>
-      <h1>{count}</h1>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </>
-  );
-}
+import { BaseRowItem_Test1 } from "@farfetchd/baserow/__tests__/BaseRowItem.test"
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(<Counter />);
+root.render(<BaseRowItem_Test1 />);

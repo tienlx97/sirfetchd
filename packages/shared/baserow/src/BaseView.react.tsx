@@ -4,35 +4,39 @@ import { LegacyHidden } from "@farfetchd/experimental"
 
 interface Props extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  xstyle: any,
   suppressHydrationWarning?: boolean,
+  xstyle: any,
+  // 
 }
 
-const styles = stylex.create({
+type style = "root" | "hidden"
+
+const styles = stylex.create<style>({
   hidden: {
     display: "none"
   },
   root: {
     boxSizing: "border-box",
     position: "relative",
-    zIndex: "0"
+    zIndex: 0
   }
 });
 
 const baseViewReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
   const { children, xstyle, suppressHydrationWarning, ...htmlAttributes } = props;
+
   const hidden = htmlAttributes.hidden === true;
   return (
     <LegacyHidden
-      mode={hidden ? "hidden" : "visible"}
-      suppressHydrationWarning={suppressHydrationWarning}
-      ref={ref}
-      htmlAttributes={Object.assign(htmlAttributes, {
+      htmlAttributes={Object.assign({}, htmlAttributes, {
         className: stylex([styles.root, xstyle, hidden && styles.hidden])
-      })}>
-      {children}
-    </LegacyHidden>
+      })}
+      mode={hidden ? "hidden" : "visible"}
+      ref={ref}
+      suppressHydrationWarning={suppressHydrationWarning}
+      children={children}
+    />
   )
 }
 

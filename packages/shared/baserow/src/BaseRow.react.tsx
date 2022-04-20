@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, Ref, useMemo } from "react";
 import BaseViewReact from "./BaseView.react"
 import { BaseRowContext } from "@farfetchd/context";
+import stylex from "@ladifire-opensource/stylex";
 
 interface Props extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
@@ -70,12 +71,12 @@ const baseRowReact = (props: Props, ref: Ref<HTMLDivElement>) => {
       {...htmlAtrributes}
       ref={ref}
       xstyle={[
-        rowBaseStyle.row,
-        baseExpanding && rowBaseStyle.expanding,
-        justifyContentStyle[baseDirection === "backward" && (baseAlign === "start" || baseAlign === "end") ? endStartReverseStyle[baseAlign] : baseAlign],
-        alignItemsStyle[baseVerticalAlign],
-        flexWrapStyle[baseWrap],
-        flexDirectionStyle[baseDirection],
+        stylex(rowBaseStyle.row),
+        baseExpanding && stylex(rowBaseStyle.expanding),
+        stylex(justifyContentStyle[baseDirection === "backward" && (baseAlign === "start" || baseAlign === "end") ? endStartReverseStyle[baseAlign] : baseAlign]),
+        stylex(alignItemsStyle[baseVerticalAlign]),
+        stylex(flexWrapStyle[baseWrap]),
+        stylex(flexDirectionStyle[baseDirection]),
         xstyle,
       ]}
     >
