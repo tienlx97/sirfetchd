@@ -1,3 +1,3 @@
 # sirfetch
 
-[Install react advance build](./documents//React.md)
+![serfetch'd](./documents//Sirfetch_d.jpg)
