@@ -9,7 +9,7 @@ function getReactDisplayName(children: any) {
   return getReactElementDisplayName(children)
 }
 
-type Props = typeof ErrorBoundaryReact.defaultProps & {
+type ErrorBoundaryProps = typeof ErrorBoundaryReact.defaultProps & {
   children?: React.ReactNode
   fallback?: (error?: Error2, moduleName?: string) => any
   forceResetErrorCount?: number
@@ -23,7 +23,7 @@ interface States {
   error: Error2 | null
 }
 
-class ErrorBoundaryReact extends React.Component<Props, States> {
+class ErrorBoundaryReact extends React.Component<ErrorBoundaryProps, States> {
 
   static defaultProps = {
     forceResetErrorCount: 0
@@ -74,7 +74,7 @@ class ErrorBoundaryReact extends React.Component<Props, States> {
     }
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
     if (this.state.error && (this.props.forceResetErrorCount != null && this.props.forceResetErrorCount != prevProps.forceResetErrorCount)) {
       this.setState({
         error: null
@@ -94,4 +94,4 @@ class ErrorBoundaryReact extends React.Component<Props, States> {
 }
 
 export default ErrorBoundaryReact
-export { ErrorBoundaryReact }
+export { ErrorBoundaryReact, ErrorBoundaryProps }

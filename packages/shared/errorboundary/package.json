@@ -6,6 +6,7 @@
   "dependencies": {
     "@farfetchd/fblogger": "*",
     "@farfetchd/utils": "*",
+    "@farfetchd/context": "*",
     "react": "*"
   }
 }
