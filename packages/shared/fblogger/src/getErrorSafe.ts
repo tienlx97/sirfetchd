@@ -35,4 +35,5 @@ function getErrorSafe(obj: Error2 | any): Error2 {
   return obj as Error2;
 }
 
+export default getErrorSafe;
 export { getErrorSafe };
