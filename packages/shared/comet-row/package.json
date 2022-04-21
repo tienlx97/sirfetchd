@@ -1,0 +1,14 @@
+{
+  "name": "@farfetchd/comet-row",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@ladifire-opensource/stylex": "^0.1.0-beta.0",
+    "react": "*",
+    "@farfetchd/errorguard": "*",
+    "@farfetchd/context": "*",
+    "@farfetchd/base-row": "*",
+    "@farfetchd/common": "*"
+  }
+}

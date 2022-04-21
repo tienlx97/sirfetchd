@@ -1,0 +1,12 @@
+{
+  "name": "@farfetchd/base-row",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@farfetchd/experimental": "*",
+    "@ladifire-opensource/stylex": "^0.1.0-beta.0",
+    "react": "*",
+    "@farfetchd/context": "*"
+  }
+}

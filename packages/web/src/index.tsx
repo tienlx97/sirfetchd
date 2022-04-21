@@ -2,7 +2,7 @@ import React from "react";
 // const React = require("react");
 const ReactDOM = require("react-dom");
 
-// import { BaseRowItem_Test1 } from "@farfetchd/baserow/__tests__/BaseRowItem.test"
+// import { BaseRowItem_Test1 } from "@farfetchd/base-row/__tests__/BaseRowItem.test"
 
 import { performanceNow } from "@farfetchd/utils"
 const GlobalDeclare = () => {

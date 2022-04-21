@@ -56,8 +56,8 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "@farfetchd/fblogger": "*",
-    "@farfetchd/baserow": "*",
+    "@farfetchd/errorguard": "*",
+    "@farfetchd/base-row": "*",
     "@farfetchd/utils": "*",
     "@ladifire-opensource/stylex": "^0.1.0-beta.0",
     "@ladifire-opensource/stylex-webpack-plugin": "^0.1.0-beta.0",

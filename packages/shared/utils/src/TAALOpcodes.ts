@@ -1,0 +1,14 @@
+const PREVIOUS_FILE = 1;
+const PREVIOUS_FRAME = 2;
+const PREVIOUS_DIR = 3;
+const FORCED_KEY = 4;
+
+const TaalOpcodes = {
+  PREVIOUS_FILE,
+  PREVIOUS_FRAME,
+  PREVIOUS_DIR,
+  FORCED_KEY,
+};
+
+export { PREVIOUS_FILE, PREVIOUS_FRAME, PREVIOUS_DIR, FORCED_KEY };
+export default TaalOpcodes;

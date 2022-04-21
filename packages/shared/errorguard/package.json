@@ -1,20 +1,20 @@
 {
-  "name": "@farfetchd/utils",
+  "name": "@farfetchd/errorguard",
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
+  "dependencies": {
+    "@farfetchd/common": "*",
+    "@farfetchd/utils": "*",
+    "@farfetchd/context": "*",
+    "react": "*"
+  },
   "scripts": {
     "test": "jest"
-  },
-  "dependencies": {
-    "react": "*",
-    "@farfetchd/common": "*",
-    "@farfetchd/errorguard": "*",
-    "@farfetchd/env": "*"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/lexuantien/sirfetchd.git",
-    "directory": "packages/shared/utils"
+    "directory": "packages/shared/fblogger"
   }
 }
