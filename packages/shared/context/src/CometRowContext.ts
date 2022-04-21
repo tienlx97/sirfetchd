@@ -1,9 +1,8 @@
 import React from "react";
+import { CometRowProps } from "./types";
 
-interface Props {
-  spacingHorizontal: number;
-  spacingVertical: number;
-}
-const CometRowContext = React.createContext<Props | null>(null);
+const CometRowContext = React.createContext<CometRowProps | undefined>(
+  undefined
+);
 export default CometRowContext;
 export { CometRowContext };

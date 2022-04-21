@@ -9,7 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   useDeprecatedStyles?: boolean
   verticalAlign?: string
   // 
-  children: string | React.ReactNode
+  children?: React.ReactNode
   columns?: number
   wrap?: string
 }
@@ -93,7 +93,7 @@ const l = stylex.create<lS>({
 
 const baseRowItemReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
-  const { xstyle, expanding, useDeprecatedStyles, verticalAlign, columns, wrap, ...attributes } = props;
+  const { expanding, useDeprecatedStyles, verticalAlign, xstyle, ...restProps } = props;
 
   const bXstyle = xstyle;
   const bExpanding = expanding === undefined ? false : expanding
@@ -103,16 +103,18 @@ const baseRowItemReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
   return (
     <BaseViewReact
-      {...attributes}
-      ref={ref}
-      xstyle={[
-        bUseDeprecatedStyles ? j.item_DEPRECATED : j.item,
-        bExpanding && j.expanding,
-        bExpanding && bWrap !== "none" && j.expandingWithWrap,
-        bColumns > 0 && k[bColumns],
-        bVerticalAlign != null && l[bVerticalAlign],
-        bXstyle
-      ]} />
+      {...Object.assign({}, restProps, {
+        ref,
+        xstyle: [
+          bUseDeprecatedStyles ? j.item_DEPRECATED : j.item,
+          bExpanding && j.expanding,
+          bExpanding && bWrap !== "none" && j.expandingWithWrap,
+          bColumns > 0 && k[bColumns],
+          bVerticalAlign != null && l[bVerticalAlign],
+          bXstyle
+        ]
+      })}
+    />
   )
 }
 

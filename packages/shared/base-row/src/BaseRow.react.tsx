@@ -54,7 +54,7 @@ const endStartReverseStyle = { end: "start", start: "end" }
 
 const baseRowReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
-  const { children, xstyle, align, columns, direction, expanding, verticalAlign, wrap, ...htmlAtrributes } = props;
+  const { align, children, columns, direction, expanding, verticalAlign, wrap, xstyle, ...restProps } = props;
 
   const baseAlign = align === undefined ? "justify" : align;
   const baseColumns = columns == undefined ? 0 : columns;
@@ -68,18 +68,18 @@ const baseRowReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
   return (
     <BaseViewReact
-      {...htmlAtrributes}
-      ref={ref}
-      xstyle={[
-        stylex(rowBaseStyle.row),
-        baseExpanding && stylex(rowBaseStyle.expanding),
-        stylex(justifyContentStyle[baseDirection === "backward" && (baseAlign === "start" || baseAlign === "end") ? endStartReverseStyle[baseAlign] : baseAlign]),
-        stylex(alignItemsStyle[baseVerticalAlign]),
-        stylex(flexWrapStyle[baseWrap]),
-        stylex(flexDirectionStyle[baseDirection]),
-        xstyle,
-      ]}
-    >
+      {...Object.assign({}, restProps, {
+        ref,
+        xstyle: [
+          stylex(rowBaseStyle.row),
+          baseExpanding && stylex(rowBaseStyle.expanding),
+          stylex(justifyContentStyle[baseDirection === "backward" && (baseAlign === "start" || baseAlign === "end") ? endStartReverseStyle[baseAlign] : baseAlign]),
+          stylex(alignItemsStyle[baseVerticalAlign]),
+          stylex(flexWrapStyle[baseWrap]),
+          stylex(flexDirectionStyle[baseDirection]),
+          xstyle,
+        ]
+      })}>
       <BaseRowContext.Provider value={baseRowContext} children={children} />
     </BaseViewReact >
   );

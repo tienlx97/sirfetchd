@@ -45,7 +45,7 @@ const stylesVertical = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
 
 interface Props {
   children?: React.ReactNode
-  expanding?: true
+  expanding?: boolean
   xstyle?: any
   fallback?: (error?: Error2, moduleName?: string) => any
   placeholder?: string
@@ -75,6 +75,7 @@ const cometRowItemReact = (props: Props, ref: any) => {
   }
 
   if (fallback != undefined) {
+    props.fallback
     const { fallback: _, ...propsWithoutFallback } = props;
     return (
       fallback == null ? (
@@ -107,7 +108,7 @@ const cometRowItemReact = (props: Props, ref: any) => {
         restProps.xstyle
       ]
     })}>
-      <CometRowContext.Provider children={children} value={null} />
+      <CometRowContext.Provider children={children} value={undefined} />
     </BaseRowItemReact>
   );
 };

@@ -2,7 +2,7 @@ import React, { Ref } from "react";
 const R = require("react")
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   mode?: string;
   suppressHydrationWarning?: boolean,
   htmlAttributes: any

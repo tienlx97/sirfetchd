@@ -1,4 +1,8 @@
 import React from "react";
-const CometColumnContext = React.createContext(null);
+import { CometColumnProps } from "./types";
+
+const CometColumnContext = React.createContext<CometColumnProps | undefined>(
+  undefined
+);
 export default CometColumnContext;
 export { CometColumnContext };

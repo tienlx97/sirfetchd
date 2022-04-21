@@ -3,9 +3,9 @@ import stylex from "@ladifire-opensource/stylex"
 import { LegacyHidden } from "@farfetchd/experimental"
 
 interface Props extends HTMLAttributes<HTMLElement> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   suppressHydrationWarning?: boolean,
-  xstyle: any,
+  xstyle?: any,
   // 
 }
 
@@ -24,18 +24,18 @@ const styles = stylex.create<style>({
 
 const baseViewReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
-  const { children, xstyle, suppressHydrationWarning, ...htmlAttributes } = props;
+  const { children, xstyle, suppressHydrationWarning, ...restProps } = props;
 
-  const hidden = htmlAttributes.hidden === true;
+  const hidden = restProps.hidden === true;
   return (
     <LegacyHidden
-      htmlAttributes={Object.assign({}, htmlAttributes, {
-        className: stylex([styles.root, xstyle, hidden && styles.hidden])
+      htmlAttributes={Object.assign({}, restProps, {
+        className: stylex([styles.root, xstyle, hidden && styles.hidden]),
+        mode: hidden ? "hidden" : "visible",
+        ref,
+        suppressHydrationWarning,
+        children
       })}
-      mode={hidden ? "hidden" : "visible"}
-      ref={ref}
-      suppressHydrationWarning={suppressHydrationWarning}
-      children={children}
     />
   )
 }

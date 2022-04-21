@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@ladifire-opensource/stylex": "^0.1.0-beta.0",
-    "react": "*",
-    "@farfetchd/errorguard": "*",
-    "@farfetchd/context": "*",
     "@farfetchd/base-row": "*",
-    "@farfetchd/common": "*"
+    "@farfetchd/common": "*",
+    "@farfetchd/context": "*",
+    "@farfetchd/errorguard": "*",
+    "@ladifire-opensource/stylex": "^0.1.0-beta.0",
+    "@reacttips/useragent": "^1.0.1",
+    "react": "*"
   }
 }
