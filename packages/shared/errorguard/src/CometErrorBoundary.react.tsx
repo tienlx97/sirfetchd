@@ -26,9 +26,9 @@ const cometErrorBoundary = (props: ErrorBoundaryProps, ref: any) => {
 
 cometErrorBoundary.displayName = `${cometErrorBoundary.name} [from CometErrorBoundary.react]`
 
-const CometErrorBoundaryRect = forwardRef(cometErrorBoundary)
+const CometErrorBoundaryReact = forwardRef(cometErrorBoundary)
 
 export {
-  CometErrorBoundaryRect
+  CometErrorBoundaryReact
 }
-export default CometErrorBoundaryRect
+export default CometErrorBoundaryReact
