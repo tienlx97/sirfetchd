@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@farfetchd/env": "*",
-    "@farfetchd/utils": "*"
+    "@farfetchd/env": "*"
   }
 }

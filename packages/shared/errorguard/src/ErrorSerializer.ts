@@ -1,5 +1,7 @@
 import { expect } from "@farfetchd/utils";
-import { ErrorProps, LogValue, Error2, ErrorMetadata } from "@farfetchd/common";
+import { Error2 } from "./Error2";
+import ErrorMetadata from "./ErrorMetadata";
+import { ErrorProps, LogValue } from "./types";
 
 function toStringParams(args: any[]) {
   const newArgs = args != undefined ? args : [];

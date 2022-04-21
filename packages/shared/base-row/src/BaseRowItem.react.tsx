@@ -14,11 +14,8 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   wrap?: string
 }
 
-type kS = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-type jS = "expanding" | "expandingWithWrap" | "item" | "item_DEPRECATED"
-type lS = "bottom" | "center" | "stretch" | "top"
 
-const j = stylex.create<jS>({
+const $1 = stylex.create<"expanding" | "expandingWithWrap" | "item" | "item_DEPRECATED">({
   expanding: {
     flexBasis: "0px",
     flexGrow: "1",
@@ -42,7 +39,7 @@ const j = stylex.create<jS>({
 })
 
 
-const k = stylex.create<kS>({
+const $2 = stylex.create<1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10>({
   1: {
     flexBasis: "100%"
   },
@@ -76,7 +73,7 @@ const k = stylex.create<kS>({
 })
 
 
-const l = stylex.create<lS>({
+const $3 = stylex.create<"bottom" | "center" | "stretch" | "top">({
   bottom: {
     alignSelf: "flex-end"
   },
@@ -93,25 +90,30 @@ const l = stylex.create<lS>({
 
 const baseRowItemReact = (props: Props, ref: Ref<HTMLDivElement>) => {
 
-  const { expanding, useDeprecatedStyles, verticalAlign, xstyle, ...restProps } = props;
+  const {
+    expanding,
+    useDeprecatedStyles,
+    verticalAlign,
+    xstyle,
+    ...restProps
+  } = props;
 
-  const bXstyle = xstyle;
-  const bExpanding = expanding === undefined ? false : expanding
-  const bUseDeprecatedStyles = useDeprecatedStyles == undefined ? false : useDeprecatedStyles
-  const bVerticalAlign = verticalAlign;
-  const { columns: bColumns, wrap: bWrap } = React.useContext(BaseRowContext)
+  const _expanding = expanding === undefined ? false : expanding
+  const _useDeprecatedStyles = useDeprecatedStyles == undefined ? false : useDeprecatedStyles
+  const _verticalAlign = verticalAlign;
+  const { columns: _columns, wrap: bWrap } = React.useContext(BaseRowContext)
 
   return (
     <BaseViewReact
       {...Object.assign({}, restProps, {
         ref,
         xstyle: [
-          bUseDeprecatedStyles ? j.item_DEPRECATED : j.item,
-          bExpanding && j.expanding,
-          bExpanding && bWrap !== "none" && j.expandingWithWrap,
-          bColumns > 0 && k[bColumns],
-          bVerticalAlign != null && l[bVerticalAlign],
-          bXstyle
+          _useDeprecatedStyles ? $1.item_DEPRECATED : $1.item,
+          _expanding && $1.expanding,
+          _expanding && bWrap !== "none" && $1.expandingWithWrap,
+          _columns > 0 && $2[_columns],
+          _verticalAlign != null && $3[_verticalAlign],
+          xstyle
         ]
       })}
     />

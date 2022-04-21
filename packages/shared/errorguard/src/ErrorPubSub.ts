@@ -1,13 +1,10 @@
-import {
-  ErrorPubSubProps,
-  NormalizeErrorProps,
-  Error2,
-} from "@farfetchd/common";
+import { Error2 } from "./Error2";
 import { removeFromArray } from "@farfetchd/utils";
 
 import ErrorGuardState from "./ErrorGuardState";
 import ErrorBrowserConsole from "./ErrorBrowserConsole";
 import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
+import { ErrorPubSubProps, NormalizeErrorProps } from "./types";
 
 let flag = false;
 const listeners: FuncErrorPubSubListener[] = [];

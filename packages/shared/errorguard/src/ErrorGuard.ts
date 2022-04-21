@@ -3,7 +3,8 @@ import ErrorSerializer from "./ErrorSerializer";
 import { getErrorSafe } from "./getErrorSafe";
 import ErrorGuardState from "./ErrorGuardState";
 import ErrorPubSub from "./ErrorPubSub";
-import { NormalizeErrorProps, Error2 } from "@farfetchd/common";
+import { Error2 } from "./Error2";
+import { NormalizeErrorProps } from "./types";
 
 const oa = "<anonymous guard>";
 let guardGlobalFlag = !1;

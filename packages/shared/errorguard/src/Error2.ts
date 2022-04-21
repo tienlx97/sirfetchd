@@ -1,5 +1,5 @@
-import { ErrorProps, LogTypeString, SourceProps } from "./Types";
 import { ErrorMetadata } from "./ErrorMetadata";
+import { ErrorProps, LogTypeString, SourceProps } from "./types";
 
 class Error2 extends Error implements ErrorProps {
   messageFormat?: string;

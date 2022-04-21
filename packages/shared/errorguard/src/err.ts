@@ -1,6 +1,6 @@
 import { PREVIOUS_FRAME } from "@farfetchd/utils/src/TAALOpcodes";
 import { expect } from "@farfetchd/utils";
-import { Error2 } from "@farfetchd/common";
+import { Error2 } from "./Error2";
 
 function err(msg: string, ...agrs: any[]) {
   const error = new Error2(msg);

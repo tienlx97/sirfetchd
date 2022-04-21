@@ -3,10 +3,11 @@ import { CometErrorBoundaryReact } from "@farfetchd/errorguard";
 import { CometColumnContext, CometRowContext } from "@farfetchd/context";
 import { BaseRowItemReact } from "@farfetchd/base-row";
 import stylex from "@ladifire-opensource/stylex";
-import { Error2 } from "@farfetchd/common";
+import { Error2 } from "@farfetchd/errorguard";
+import { CometRowItemProps } from "./types";
 
 // paddingRightLef
-const stylesHorizontal = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
+const $1 = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
   4: {
     paddingRight: "2px",
     paddingLeft: "2px",
@@ -34,7 +35,7 @@ const stylesHorizontal = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
 });
 
 // paddingBottomTop
-const stylesVertical = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
+const $2 = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
   4: { paddingBottom: "2px", paddingTop: "2px" },
   8: { paddingBottom: "4px", paddingTop: "4px" },
   12: { paddingBottom: "6px", paddingTop: "6px" },
@@ -43,21 +44,19 @@ const stylesVertical = stylex.create<4 | 8 | 12 | 16 | 24 | 32>({
   32: { paddingBottom: "16px", paddingTop: "16px" },
 });
 
-interface Props {
-  children?: React.ReactNode
-  expanding?: boolean
-  xstyle?: any
-  fallback?: (error?: Error2, moduleName?: string) => any
-  placeholder?: string
-  useDeprecatedStyles?: boolean,
 
-}
 
-const cometRowItemReact = (props: Props, ref: any) => {
+const cometRowItemReact = (props: CometRowItemProps, ref: any) => {
 
   const { spacingHorizontal, spacingVertical } = useContext(CometRowContext)!
 
-  const { fallback, placeholder, children, ...restProps } = props
+  const {
+    fallback,
+    placeholder,
+    children,
+    xstyle,
+    ...restProps
+  } = props
 
   if (placeholder != undefined) {
     // a.placeholder;
@@ -80,34 +79,56 @@ const cometRowItemReact = (props: Props, ref: any) => {
     return (
       fallback == null ? (
         <CometErrorBoundaryReact>
-          <CometRowItemReact {...Object.assign({}, propsWithoutFallback, { ref })} />
+          <CometRowItemReact
+            {...propsWithoutFallback}
+            ref={ref}
+          // {...Object.assign({}, propsWithoutFallback, { ref })}
+          />
         </CometErrorBoundaryReact>
       ) : (
         <CometErrorBoundaryReact
           fallback={(error, moduleName) => {
             return (
-              <CometRowItemReact {...Object.assign({}, propsWithoutFallback, {
-                ref,
-                children: typeof fallback === "function" ? fallback(error, moduleName) : fallback
-              })} />
+              <CometRowItemReact
+                {...propsWithoutFallback}
+                ref={ref}
+                children={typeof fallback === "function" ? fallback(error, moduleName) : fallback}
+              // {...Object.assign({}, propsWithoutFallback, {
+              //   ref,
+              //   children: typeof fallback === "function" ? fallback(error, moduleName) : fallback
+              // })}
+              />
             )
           }}>
-          <CometRowItemReact {...Object.assign({}, propsWithoutFallback, { ref })} />
+          <CometRowItemReact
+            {...propsWithoutFallback}
+            ref={ref}
+          // {...Object.assign({}, propsWithoutFallback, { ref })}
+          />
         </CometErrorBoundaryReact>
       )
     )
   }
 
   return (
-    <BaseRowItemReact  {...Object.assign({}, restProps, {
-      ref,
-      useDeprecatedStyles: restProps.useDeprecatedStyles,
-      xstyle: [
-        stylesHorizontal[spacingHorizontal],
-        stylesVertical[spacingVertical],
-        restProps.xstyle
-      ]
-    })}>
+    <BaseRowItemReact
+      {...restProps}
+      ref={ref}
+      xstyle={[
+        $1[spacingHorizontal],
+        $2[spacingVertical],
+        xstyle
+      ]}
+    // {...Object.assign({}, restProps, {
+    //   ref,
+    //   useDeprecatedStyles: restProps.useDeprecatedStyles,
+    //   xstyle: [
+    //     $1[spacingHorizontal],
+    //     $2[spacingVertical],
+    //     restProps.xstyle
+    //   ]
+    // })}
+    >
       <CometRowContext.Provider children={children} value={undefined} />
     </BaseRowItemReact>
   );

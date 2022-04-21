@@ -4,6 +4,7 @@ import { CometRowItemReact } from "./CometRowItem.react"
 import { CometColumnItemReact } from "./CometColumnItem.react"
 import { BaseRowReact } from "@farfetchd/base-row"
 import stylex from "@ladifire-opensource/stylex";
+import { CometRowReactProps } from "./types";
 
 const $1 = stylex.create({
   4: { paddingRight: "4px", paddingLeft: "4px" },
@@ -41,26 +42,17 @@ const $1 = stylex.create({
     32: { marginBottom: "16px", marginTop: "16px" },
   });
 
-interface Props {
-  children?: React.ReactNode
-  paddingHorizontal?: number
-  paddingVertical?: number
-  paddingTop?: number
-  spacing?: number
-  spacingHorizontal?: number
-  spacingVertical?: number
-  xstyle?: any
-  expanding?: boolean
-}
 
 // null == undefined => true
 // null === undefined => false
 // check `value` is not null and not undefined => value != null
-const cometRowReact = (props: Props, ref: any) => {
-  const contextColumn = useContext(CometColumnContext)
+const cometRowReact = (props: CometRowReactProps, ref: any) => {
+
+  const contextCometColumn = useContext(CometColumnContext)
   const contextCometRow = useContext(CometRowContext)
-  let _paddingHorizontal = (contextColumn == null ? undefined : contextColumn.paddingHorizontal) != null ? 0 : 12
-  const _spacing = (contextColumn == null ? undefined : contextColumn.spacing) != null ? 0 : 16
+
+  let _paddingHorizontal = (contextCometColumn == null ? undefined : contextCometColumn.paddingHorizontal) != null ? 0 : 12
+  const tmpSpacing = (contextCometColumn == null ? undefined : contextCometColumn.spacing) != null ? 0 : 16
 
   const {
     children,
@@ -76,7 +68,7 @@ const cometRowReact = (props: Props, ref: any) => {
 
   paddingHorizontal !== undefined && (_paddingHorizontal = paddingHorizontal);
   const _paddingVertical = paddingVertical === undefined ? 0 : paddingVertical
- /*_spacing*/ const $spacing = paddingTop === undefined ? (paddingVertical == undefined ? _spacing : undefined) : paddingTop
+  const _spacing = paddingTop === undefined ? (paddingVertical == undefined ? tmpSpacing : undefined) : paddingTop
   const _spacingHV = spacing == undefined ? 12 : spacing
   const _spacingHorizontal = spacingHorizontal == undefined ? _spacingHV : spacingHorizontal
   const _spacingVertical = spacingVertical == undefined ? _spacingHV : spacingVertical
@@ -86,14 +78,14 @@ const cometRowReact = (props: Props, ref: any) => {
     return { spacingHorizontal: _spacingHorizontal, spacingVertical: _spacingVertical };
   }, [_spacingHorizontal, _spacingVertical]);
 
-  const BaseRowReactElement = (
+  const baseRowReactElement = (
     <BaseRowReact
       {...restProps}
       ref={ref}
       xstyle={[
         $1[_paddingHorizontal],
         $3[_paddingVertical],
-        $spacing != null && $2[$spacing],
+        _spacing != null && $2[_spacing],
         $4[_spacingHorizontal],
         $5[_spacingVertical],
         xstyle
@@ -103,11 +95,17 @@ const cometRowReact = (props: Props, ref: any) => {
     </BaseRowReact>
   )
   if (contextCometRow != null)
-    return <CometRowItemReact expanding={restProps.expanding} children={BaseRowReactElement} />
+    return <CometRowItemReact
+      expanding={restProps.expanding}
+      children={baseRowReactElement}
+    />
 
-  return contextColumn != null ? (
-    <CometColumnItemReact expanding={restProps.expanding} children={BaseRowReactElement} />
-  ) : BaseRowReactElement
+  return contextCometColumn != null ? (
+    <CometColumnItemReact
+      expanding={restProps.expanding}
+      children={baseRowReactElement}
+    />
+  ) : baseRowReactElement
 }
 
 cometRowReact.displayName = `${cometRowReact.name} [from CometRowReact.react]`;

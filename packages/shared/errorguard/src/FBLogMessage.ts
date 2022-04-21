@@ -1,9 +1,4 @@
-import {
-  LogTypeString,
-  NormalizeErrorProps,
-  Error2,
-  ErrorMetadata,
-} from "@farfetchd/common";
+import { Error2 } from "./Error2";
 import ErrorSerializer from "./ErrorSerializer";
 import {
   PREVIOUS_DIR,
@@ -13,6 +8,8 @@ import {
 import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
 import { err } from "./err";
 import ErrorPubSub from "./ErrorPubSub";
+import ErrorMetadata from "./ErrorMetadata";
+import { LogTypeString, NormalizeErrorProps } from "./types";
 
 class FBLogMessage {
   project: string;
@@ -35,7 +32,7 @@ class FBLogMessage {
     const messageFormat = String(msgFormat);
     const { events, project, metadata, blameModule, forcedKey } = this;
     let error = this.error;
-    let normalizeErrorObj: NormalizeErrorProps | null = null;
+    let normalizeErrorObj: NormalizeErrorProps;
     if (this.normalizedError) {
       const obj = {
         message:
@@ -111,7 +108,7 @@ class FBLogMessage {
       } else normalizeErrorObj!.events = events;
     }
     ErrorPubSub.reportNormalizedError(normalizeErrorObj!);
-    return error;
+    return error as Error2;
   }
 
   fatal = (msg: string, ...params: any) => {

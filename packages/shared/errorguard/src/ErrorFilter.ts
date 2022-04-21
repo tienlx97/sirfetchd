@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
-import { NormalizeErrorProps } from "@farfetchd/common";
 import { performanceNow } from "@farfetchd/utils";
+import { NormalizeErrorProps } from "./types";
 
 interface ErrorFilterProp {
   dropped: number;

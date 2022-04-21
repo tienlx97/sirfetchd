@@ -1,6 +1,6 @@
-import { Error2 } from "@farfetchd/common";
-import { PREVIOUS_FRAME } from "./TAALOpcodes";
-import { Env } from "@farfetchd/env";
+import { Error2 } from "@farfetchd/errorguard";
+import { TAALOpcodes } from "@farfetchd/utils";
+import env from "./Env";
 
 function invariant(a, b, ...args) {
   if (!a) {
@@ -23,7 +23,7 @@ function invariant(a, b, ...args) {
     n.messageParams = args.map(function (a) {
       return String(a);
     });
-    n.taalOpcodes = [PREVIOUS_FRAME];
+    n.taalOpcodes = [TAALOpcodes.PREVIOUS_FRAME];
     n.stack;
     throw n;
   }
@@ -39,7 +39,7 @@ function h(invariantValue, args) {
         })
         .join(", "));
   invariantValue =
-    Env.show_invariant_decoder === true
+    env.show_invariant_decoder === true
       ? "visit " + i(invariantValue, args) + " to see the full message."
       : "";
   return {

@@ -9,3 +9,5 @@ export { default as recoverableViolation } from "./src/recoverableViolation";
 export { default as keyMirror } from "./src/keyMirror";
 export { default as err } from "./src/err";
 export { default as fbErrorLite } from "./src/fb-error-lite";
+export { default as Error2 } from "./src/Error2";
+export { default as ErrorMetadata } from "./src/ErrorMetadata";

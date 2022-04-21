@@ -1,6 +1,7 @@
-import { ErrorPubSubProps, Error2 } from "@farfetchd/common";
+import { Error2 } from "./Error2";
 import { err } from "./err";
 import { getErrorSafe } from "./getErrorSafe";
+import { ErrorPubSubProps } from "./types";
 
 let errorPubSub: ErrorPubSubProps | null = null,
   flag = false;

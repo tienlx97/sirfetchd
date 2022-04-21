@@ -1,5 +1,6 @@
-import { ErrorProps, Error2 } from "@farfetchd/common";
+import { Error2 } from "../src/Error2";
 import ErrorSerializer from "../src/ErrorSerializer";
+import { ErrorProps } from "../src/types";
 
 const error = new Error2(
   "Network request encountered error HTTP HTTP_TRANSPORT_ERROR: "

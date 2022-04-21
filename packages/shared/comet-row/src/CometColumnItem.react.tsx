@@ -4,6 +4,7 @@ import { CometColumnContext, CometColumnProps } from "@farfetchd/context"
 import { BaseViewReact } from "@farfetchd/base-row";
 import { CometErrorBoundaryReact } from "@farfetchd/errorguard";
 import stylex from "@ladifire-opensource/stylex";
+import { CometColumnItemReactProps } from "./types";
 
 const $1 = stylex.create({
   divider: {
@@ -12,13 +13,16 @@ const $1 = stylex.create({
     borderTopWidth: "1px",
     ":first-child": { display: "none" },
   },
+
   expanding: {
     flexBasis: "100%",
     flexGrow: 1,
     flexShrink: 1,
     minHeight: 0,
   },
+
   expandingIE11: { flexBasis: "auto" },
+
   root: {
     display: "flex",
     flexDirection: "column",
@@ -78,20 +82,8 @@ const $8 = stylex.create({
 })
 const isBrowser = UserAgent.isBrowser("IE >= 11");
 
-interface Props {
-  children?: React.ReactNode
-  paddingTop?: number
-  paddingHorizontal?: number
-  paddingVertical?: number
-  expanding?: boolean
-  verticalAlign?: string
-  placeholder?: any
-  fallback?: any
-  align?: any
-  xstyle?: any
-}
 
-const cometColumnItemReact = (props: Props, ref: any) => {
+const cometColumnItemReact = (props: CometColumnItemReactProps, ref: any) => {
 
   const {
     align,
@@ -103,19 +95,21 @@ const cometColumnItemReact = (props: Props, ref: any) => {
     paddingVertical,
     placeholder,
     verticalAlign,
+    xstyle,
     ...restProps
   } = props;
-  const context = useContext(CometColumnContext) != null ? useContext(CometColumnContext) : {} as CometColumnProps
 
-  let cAlign, cExpanding, cPaddingHorizontal, cPaddingVertical, cVerticalAlign;
+  const contextCometColumn = useContext(CometColumnContext) != null ? useContext(CometColumnContext) : {} as CometColumnProps
+
+  let _align, _expanding, _paddingHorizontal, _paddingVertical, _verticalAlign;
 
   if (align === undefined) {
-    if (context?.align != undefined)
-      cAlign = context.align
+    if (contextCometColumn?.align != undefined)
+      _align = contextCometColumn.align
     else
-      cAlign = "stretch"
+      _align = "stretch"
   } else {
-    cAlign = align
+    _align = align
   }
 
   // cChildren = children
@@ -124,53 +118,76 @@ const cometColumnItemReact = (props: Props, ref: any) => {
   // cPlaceholder = placeholder
 
   if (expanding == undefined) {
-    cExpanding = false
-  } else cExpanding = expanding
+    _expanding = false
+  } else {
+    _expanding = expanding
+  }
 
   if (paddingHorizontal == undefined) {
-    if (context?.paddingHorizontal != undefined)
-      cPaddingHorizontal = context.align
+    if (contextCometColumn?.paddingHorizontal != undefined)
+      _paddingHorizontal = contextCometColumn.align
     else
-      cPaddingHorizontal = 0
+      _paddingHorizontal = 0
   } else {
-    cPaddingHorizontal = paddingHorizontal
+    _paddingHorizontal = paddingHorizontal
   }
 
   if (paddingVertical == undefined) {
-    cPaddingVertical = 0
+    _paddingVertical = 0
   } else {
-    cPaddingVertical = paddingVertical
+    _paddingVertical = paddingVertical
   }
 
   if (verticalAlign == undefined) {
-    cVerticalAlign = "top"
+    _verticalAlign = "top"
   } else {
-    cVerticalAlign = verticalAlign
+    _verticalAlign = verticalAlign
   }
 
   let element = (
     <React.Fragment>
-      {context?.hasDividers != undefined && (
+      {contextCometColumn?.hasDividers != undefined && (
         <BaseViewReact
           role="separator"
-          xstyle={[$1.divider, $8[context.paddingHorizontal != undefined ? context.paddingHorizontal : 0]]}
+          xstyle={[
+            $1.divider,
+            $8[contextCometColumn.paddingHorizontal != undefined
+              ? contextCometColumn.paddingHorizontal
+              : 0
+            ]
+          ]}
         />
       )}
       {
-        <BaseViewReact {...Object.assign({}, restProps, {
-          ref,
-          xstyle: [
+        <BaseViewReact
+          {...restProps}
+          ref={ref}
+          xstyle={[
             $1.root,
-            cExpanding && [$1.expanding, isBrowser && $1.expandingIE11],
-            cAlign !== "stretch" && $2[cAlign],
-            cVerticalAlign !== "top" && $7[cVerticalAlign],
-            context?.spacing != null && $6[context?.spacing],
-            $3[cPaddingHorizontal],
-            $5[cPaddingVertical],
+            _expanding && [$1.expanding, isBrowser && $1.expandingIE11],
+            _align !== "stretch" && $2[_align],
+            _verticalAlign !== "top" && $7[_verticalAlign],
+            contextCometColumn?.spacing != null && $6[contextCometColumn?.spacing],
+            $3[_paddingHorizontal],
+            $5[_paddingVertical],
             paddingTop != null && $4[paddingTop],
-            restProps.xstyle,
-          ]
-        })}>
+            xstyle, //
+          ]}
+        // {...Object.assign({}, restProps, {
+        //   ref,
+        //   xstyle: [
+        //     $1.root,
+        //     _expanding && [$1.expanding, isBrowser && $1.expandingIE11],
+        //     _align !== "stretch" && $2[_align],
+        //     _verticalAlign !== "top" && $7[_verticalAlign],
+        //     contextCometColumn?.spacing != null && $6[contextCometColumn?.spacing],
+        //     $3[_paddingHorizontal],
+        //     $5[_paddingVertical],
+        //     paddingTop != null && $4[paddingTop],
+        //     restProps.xstyle,
+        //   ]
+        // })}
+        >
           <CometColumnContext.Provider value={undefined} children={children} />
         </BaseViewReact>
       }
@@ -186,10 +203,15 @@ const cometColumnItemReact = (props: Props, ref: any) => {
       element = (
         <CometErrorBoundaryReact
           fallback={(error, moduleName) => {
-            <CometColumnItemReact {...Object.assign({}, propsWithoutFallback, {
-              ref,
-              children: typeof fallback === "function" ? fallback(error, moduleName) : fallback
-            })} />
+            <CometColumnItemReact
+              {...propsWithoutFallback}
+              ref={ref}
+              children={typeof fallback === "function" ? fallback(error, moduleName) : fallback}
+            // {...Object.assign({}, propsWithoutFallback, {
+            //   ref,
+            //   children: typeof fallback === "function" ? fallback(error, moduleName) : fallback
+            // })}
+            />
           }}
           children={element}
         />

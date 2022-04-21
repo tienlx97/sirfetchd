@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect } from "react";
+import { useLayoutEffect, useEffect } from "react";
 
 import { ExecutionEnvironment } from "@farfetchd/env";
 

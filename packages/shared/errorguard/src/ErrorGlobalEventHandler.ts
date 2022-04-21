@@ -1,6 +1,7 @@
-import { ErrorPubSubProps, Error2 } from "@farfetchd/common";
+import { Error2 } from "./Error2";
 import { err } from "./err";
 import { getErrorSafe } from "./getErrorSafe";
+import { ErrorPubSubProps } from "./types";
 
 const onError =
   typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>";

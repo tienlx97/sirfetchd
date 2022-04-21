@@ -1,14 +1,11 @@
-import {
-  NormalizeErrorProps,
-  StackItemProps,
-  ErrorMetadata,
-  Error2,
-} from "@farfetchd/common";
+import { Error2 } from "./Error2";
 import { expect, performanceNow, getSimpleHash } from "@farfetchd/utils";
 import { getAll } from "./ErrorXFBDebug";
 import { toReadableMessage } from "./ErrorSerializer";
 
 import { PREVIOUS_FRAME } from "@farfetchd/utils/src/TAALOpcodes";
+import { NormalizeErrorProps, StackItemProps } from "./types";
+import ErrorMetadata from "./ErrorMetadata";
 
 const stackLineRegex = [
     /\(([^\s\)\()]+):(\d+):(\d+)\)$/,

@@ -1,13 +1,7 @@
-import React, { HTMLAttributes, Ref } from "react";
+import React, { Ref } from "react";
 import stylex from "@ladifire-opensource/stylex"
 import { LegacyHidden } from "@farfetchd/experimental"
-
-interface Props extends HTMLAttributes<HTMLElement> {
-  children?: React.ReactNode;
-  suppressHydrationWarning?: boolean,
-  xstyle?: any,
-  // 
-}
+import { BaseViewProps } from "./types";
 
 type style = "root" | "hidden"
 
@@ -15,6 +9,7 @@ const styles = stylex.create<style>({
   hidden: {
     display: "none"
   },
+
   root: {
     boxSizing: "border-box",
     position: "relative",
@@ -22,9 +17,14 @@ const styles = stylex.create<style>({
   }
 });
 
-const baseViewReact = (props: Props, ref: Ref<HTMLDivElement>) => {
+const baseViewReact = (props: BaseViewProps, ref: Ref<HTMLDivElement>) => {
 
-  const { children, xstyle, suppressHydrationWarning, ...restProps } = props;
+  const {
+    children,
+    xstyle,
+    suppressHydrationWarning,
+    ...restProps
+  } = props;
 
   const hidden = restProps.hidden === true;
   return (

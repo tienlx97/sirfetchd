@@ -1,7 +1,7 @@
 import { ExecutionEnvironment } from "@farfetchd/env";
 import emptyFunction from "./emptyFunction";
 import BanzaiLazyQueue from "./BanzaiLazyQueue";
-import { invariant } from "@farfetchd/utils";
+import { invariant } from "@farfetchd/env";
 const i = {},
   j = {};
 function k(a) {

@@ -4,8 +4,9 @@ import ErrorPubSub from "./ErrorPubSub"
 import { getErrorSafe } from "./getErrorSafe"
 import ErrorSerializer from "./ErrorSerializer";
 
-import { Error2, ErrorProps } from "@farfetchd/common";
 import { getReactElementDisplayName } from "@farfetchd/utils";
+import Error2 from "./Error2";
+import { ErrorProps } from "./types";
 
 function getReactDisplayName(children: any) {
   children = React.Children.count(children) > 1 ? React.Children.toArray(children)[0] : children;

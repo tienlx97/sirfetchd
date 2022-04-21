@@ -6,4 +6,3 @@ export { default as getReactComponentDisplayName } from "./src/getReactComponent
 export { default as getReactElementDisplayName } from "./src/getReactElementDisplayName";
 export { default as sprintf } from "./src/sprintf";
 export { default as TAALOpcodes } from "./src/TAALOpcodes";
-export { default as invariant } from "./src/invariant";

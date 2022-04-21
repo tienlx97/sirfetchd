@@ -1,9 +1,5 @@
-import {
-  ErrorPosterProp,
-  NormalizeErrorProps,
-  StackItemProps,
-} from "@farfetchd/common";
 import ErrorFilter from "./ErrorFilter";
+import { ErrorPosterProp, NormalizeErrorProps, StackItemProps } from "./types";
 
 const l = {
   access_token: undefined,

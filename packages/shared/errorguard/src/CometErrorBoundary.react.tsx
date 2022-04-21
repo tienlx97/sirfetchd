@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { ErrorBoundaryProps, ErrorBoundaryReact } from "./ErrorBoundary.react";
 import { CometHeroInteractionContext } from "@farfetchd/context"
-import { ErrorMetadata } from "@farfetchd/common";
+import ErrorMetadata from "./ErrorMetadata";
 
 const cometErrorBoundary = (props: ErrorBoundaryProps, ref: any) => {
   const context = useContext(CometHeroInteractionContext.Context);
