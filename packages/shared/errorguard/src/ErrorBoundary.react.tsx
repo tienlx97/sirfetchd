@@ -52,12 +52,12 @@ class ErrorBoundaryReact extends React.Component<ErrorBoundaryProps, States> {
     }
   }
 
-  componentDidCatch(e: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(e: Error2, errorInfo: React.ErrorInfo) {
     const componentStack = errorInfo.componentStack;
     let { context, description, } = this.props;
     const { onError } = this.props
 
-    context === undefined && (context = {})
+    context === undefined && (context = {} as ErrorProps)
     description === undefined && (description = "base")
 
     if (context.messageFormat == null) {
@@ -78,7 +78,7 @@ class ErrorBoundaryReact extends React.Component<ErrorBoundaryProps, States> {
     }
   }
 
-  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+  componentDidUpdate(prevProps: any) {
     if (this.state.error && (this.props.forceResetErrorCount != null && this.props.forceResetErrorCount != prevProps.forceResetErrorCount)) {
       this.setState({
         error: null

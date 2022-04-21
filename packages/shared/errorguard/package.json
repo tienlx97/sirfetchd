@@ -4,7 +4,6 @@
   "main": "index.ts",
   "license": "MIT",
   "dependencies": {
-    "@farfetchd/common": "*",
     "@farfetchd/utils": "*",
     "@farfetchd/context": "*",
     "react": "*"

@@ -2,11 +2,13 @@ import React, { forwardRef, useContext } from "react";
 import { ErrorBoundaryProps, ErrorBoundaryReact } from "./ErrorBoundary.react";
 import { CometHeroInteractionContext } from "@farfetchd/context"
 import ErrorMetadata from "./ErrorMetadata";
+import { ErrorProps } from "./types";
 
 const cometErrorBoundary = (props: ErrorBoundaryProps, ref: any) => {
   const context = useContext(CometHeroInteractionContext.Context);
   const { pageletStack } = context
-  props.context = props.context || {}
+  props = Object.assign({}, props)
+  props.context == null && (props.context = {} as ErrorProps)
   const metadata = (props.context == null ? undefined : props.context.metadata) || new ErrorMetadata()
   if (pageletStack != null) {
     metadata.addEntries(["COMET_INFRA", "INTERACTION_PAGELET_STACK", pageletStack.join(",")])
