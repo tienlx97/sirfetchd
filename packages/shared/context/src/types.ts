@@ -10,4 +10,6 @@ interface CometRowProps {
   spacingVertical: number;
 }
 
-export { CometColumnProps, CometRowProps };
+interface CometContainerPressableProp {}
+
+export { CometColumnProps, CometRowProps, CometContainerPressableProp };

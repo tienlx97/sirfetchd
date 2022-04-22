@@ -1,0 +1,19 @@
+{
+  "name": "@farfetchd/input",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@farfetchd/context": "*",
+    "react": "*",
+    "@ladifire-opensource/stylex": "^0.1.0-beta.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lexuantien/sirfetchd.git",
+    "directory": "packages/shared/input"
+  }
+}

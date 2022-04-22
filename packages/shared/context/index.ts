@@ -4,3 +4,4 @@ export { default as CometColumnContext } from "./src/CometColumnContext";
 export { default as CometRowContext } from "./src/CometRowContext";
 export { default as CometErrorProjectContext } from "./src/CometErrorProjectContext";
 export { CometColumnProps, CometRowProps } from "./src/types";
+export { default as CometContainerPressableContext } from "./src/CometContainerPressableContext";
