@@ -1,37 +1,54 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { CometErrorBoundaryReact } from "../src/CometErrorBoundary.react"
 import Error2 from "../src/Error2"
 import ErrorBrowserConsole from "../src/ErrorBrowserConsole";
 import ErrorPubSub from "../src/ErrorPubSub";
 import ErrorSetup from "../src/ErrorSetup";
+import FBLogger from "../src/FBLogger";
+import unrecoverableViolation from "../src/unrecoverableViolation";
 
 
 ErrorPubSub.addListener(ErrorBrowserConsole.errorListener)
 ErrorSetup.preSetup();
 
-function BuggyCounter() {
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+
+function ComponentPropalyThrowError() {
 
   const [counter, setCounter] = useState(0)
 
-  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const buttonHandler = (event: React.MouseEvent<HTMLHeadingElement>) => {
     event.preventDefault();
     setCounter(counter + 1)
   };
 
   useEffect(() => {
     if (counter === 5) {
-      throw new Error2('I crashed!');
+      const rndInt = randomIntFromInterval(0, 2)
+      if (rndInt == 0) {
+        unrecoverableViolation("ComponentPropalyThrowError has counter > 5", "comet_feed")
+      } else {
+        throw new Error2('I crashed!');
+      }
     }
 
   }, [counter])
 
 
 
-  return <button onClick={buttonHandler}>{counter}</button>;
+  return <h1 onClick={buttonHandler}>{counter}</h1>;
 }
 
 
 function CometErrorBoundary_Test1() {
+
+  const b = useCallback((a) => {
+    FBLogger("CometErrorBoundary_Test1").catching(a).warn("Failed to render next counter because it equal 5")
+  }, []);
+
   return (
     <div>
       <p>
@@ -45,17 +62,45 @@ function CometErrorBoundary_Test1() {
       </p>
       <hr />
       <CometErrorBoundaryReact
-        fallback={() => <div>Fail 1</div>}
+        fallback={() => <div>Fail, counter = 5</div>}
       >
-        <BuggyCounter />
+        <p>These two counters are inside the same error boundary. If one crashes, the error boundary will replace both of them.</p>
+        <ComponentPropalyThrowError />
+        <ComponentPropalyThrowError />
       </CometErrorBoundaryReact>
       <hr />
 
       <p>These two counters are each inside of their own error boundary. So if one crashes, the other is not affected.</p>
-      <CometErrorBoundaryReact fallback={() => <div>Fail 2</div>}><BuggyCounter /></CometErrorBoundaryReact>
-      <CometErrorBoundaryReact fallback={() => <div>Fail 3</div>}><BuggyCounter /></CometErrorBoundaryReact>
+      <CometErrorBoundaryReact fallback={() => <div>Fail 3</div>}>
+        <ComponentPropalyThrowError />
+      </CometErrorBoundaryReact>
+      <CometErrorBoundaryReact
+        fallback={() => <div>Fail 3</div>}
+      ><ComponentPropalyThrowError />
+      </CometErrorBoundaryReact>
 
-    </div>
+      <hr />
+
+      <p>Log Error at fallback() function</p>
+      <CometErrorBoundaryReact
+        fallback={(e) => {
+          return e != null ? <div>{e.stack}</div> : <div>Nothing fallback because e is null</div>
+        }}
+      >
+        <ComponentPropalyThrowError />
+      </CometErrorBoundaryReact>
+
+      <hr />
+
+      <p>Log sth at onError() function</p>
+      <CometErrorBoundaryReact
+        onError={b}
+      >
+        <ComponentPropalyThrowError />
+      </CometErrorBoundaryReact>
+
+
+    </div >
   );
 }
 

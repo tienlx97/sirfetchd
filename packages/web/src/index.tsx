@@ -8,3 +8,5 @@ import {
 } from "@farfetchd/errorguard/__tests__/commetErrorBoundary.test"
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<CometErrorBoundary_Test1 />);
+
+

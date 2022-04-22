@@ -1,4 +1,3 @@
-import { expect } from "@farfetchd/utils";
 import { Error2 } from "./Error2";
 import ErrorMetadata from "./ErrorMetadata";
 import { ErrorProps, LogValue } from "./types";

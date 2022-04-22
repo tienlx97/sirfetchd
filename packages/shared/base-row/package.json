@@ -7,6 +7,8 @@
     "@farfetchd/experimental": "*",
     "@ladifire-opensource/stylex": "^0.1.0-beta.0",
     "react": "*",
-    "@farfetchd/context": "*"
+    "@farfetchd/context": "*",
+    "@farfetchd/errorguard": "*",
+    "@reacttips/useragent": "^1.0.1"
   }
 }

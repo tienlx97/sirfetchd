@@ -1,11 +1,6 @@
 const { ROOT_DIR } = require("./envs");
 const path = require("path");
-const {
-  caseSensitivePathsPlugin,
-  webpackNotifierPlugin,
-  webpackPluginServe,
-  reactRefreshPlugin,
-} = require("./plugins");
+const { caseSensitivePathsPlugin, reactRefreshPlugin } = require("./plugins");
 
 const devConfig = {
   // entry: ["webpack-plugin-serve/client"],
@@ -20,6 +15,9 @@ const devConfig = {
   },
 
   devServer: {
+    client: {
+      overlay: false,
+    },
     port: 8080,
     static: path.join(ROOT_DIR, "/dist"),
     host: "localhost",
@@ -27,12 +25,7 @@ const devConfig = {
     historyApiFallback: true,
   },
 
-  plugins: [
-    reactRefreshPlugin,
-    // webpackPluginServe,
-    caseSensitivePathsPlugin,
-    // webpackNotifierPlugin,
-  ],
+  plugins: [reactRefreshPlugin, caseSensitivePathsPlugin],
 };
 
 module.exports = devConfig;

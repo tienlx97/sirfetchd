@@ -1,28 +1,24 @@
 import { Error2 } from "./Error2";
-import {
-  PREVIOUS_DIR,
-  PREVIOUS_FILE,
-  PREVIOUS_FRAME,
-} from "@farfetchd/utils/src/TAALOpcodes";
+import { TAALOpcodes } from "@farfetchd/utils";
 
 const taalOpcodesValue = (taalOpcodes: number[] | undefined) =>
   taalOpcodes != null ? taalOpcodes : [];
 
 const blameToPreviousFile = (error: Error2) => {
   error.taalOpcodes = taalOpcodesValue(error.taalOpcodes);
-  error.taalOpcodes.push(PREVIOUS_FILE);
+  error.taalOpcodes.push(TAALOpcodes.PREVIOUS_FILE);
   return error;
 };
 
 const blameToPreviousFrame = (error: Error2) => {
   error.taalOpcodes = taalOpcodesValue(error.taalOpcodes);
-  error.taalOpcodes.push(PREVIOUS_FRAME);
+  error.taalOpcodes.push(TAALOpcodes.PREVIOUS_FRAME);
   return error;
 };
 
 const blameToPreviousDirectory = (error: Error2) => {
   error.taalOpcodes = taalOpcodesValue(error.taalOpcodes);
-  error.taalOpcodes.push(PREVIOUS_DIR);
+  error.taalOpcodes.push(TAALOpcodes.PREVIOUS_DIR);
   return error;
 };
 

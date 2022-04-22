@@ -5,7 +5,6 @@ const glob = require("glob");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin"); // use inside the npm package
-const WebpackNotifierPlugin = require("webpack-notifier");
 const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { DefinePlugin, BannerPlugin } = require("webpack");
@@ -26,12 +25,6 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.join(ROOT_DIR, "./public/index.html"),
   filename: "index.html",
   inject: true,
-});
-
-const webpackNotifierPlugin = new WebpackNotifierPlugin({
-  title: function (params) {
-    return `Build status is ${params.status} with message ${params.message}`;
-  },
 });
 
 const miniCssExtactPlugin = new MiniCssExtractPlugin({
@@ -61,7 +54,9 @@ const esLintPlugin = new ESLintWebpackPlugin({
   extensions: ["js", "jsx", "ts", "tsx"],
 });
 
-const reactRefreshPlugin = new ReactRefreshWebpackPlugin();
+const reactRefreshPlugin = new ReactRefreshWebpackPlugin({
+  overlay: false,
+});
 
 const forkTsPlugin = new ForkTsCheckerWebpackPlugin({
   async: false,
@@ -84,7 +79,6 @@ const minifyCss = ({ options }) =>
 module.exports = {
   htmlWebpackPlugin,
   caseSensitivePathsPlugin,
-  webpackNotifierPlugin,
   purgeCssPlugin,
   miniCssExtactPlugin,
   definePlugin,

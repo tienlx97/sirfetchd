@@ -1,5 +1,5 @@
 import { Error2 } from "./Error2";
-import { PREVIOUS_FRAME } from "@farfetchd/utils/src/TAALOpcodes";
+import { TAALOpcodes } from "@farfetchd/utils";
 import { err } from "./err";
 
 const reExnId = "RE_EXN_ID";
@@ -29,7 +29,7 @@ function getErrorSafe(obj: Error2 | any): Error2 {
 
   if (newErr != null) {
     newErr.taalOpcodes = newErr.taalOpcodes || [];
-    newErr.taalOpcodes.push(PREVIOUS_FRAME);
+    newErr.taalOpcodes.push(TAALOpcodes.PREVIOUS_FRAME);
     return newErr;
   }
   return obj as Error2;

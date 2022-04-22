@@ -4,7 +4,7 @@ import FBLogger from "./FBLogger";
 function unrecoverableViolation(
   msg: string,
   projectName: string,
-  e?: any,
+  category?: any,
   errObj?: any
 ) {
   errObj == undefined && (errObj = {});
@@ -13,7 +13,8 @@ function unrecoverableViolation(
   fbLogMsg = errObj
     ? fbLogMsg.catching(errObj as Error2)
     : fbLogMsg.blameToPreviousFrame();
-  const categoryKey = e == undefined ? undefined : (e.categoryKey as string);
+  const categoryKey =
+    category == undefined ? undefined : (category.categoryKey as string);
   categoryKey != undefined &&
     (fbLogMsg = fbLogMsg.addToCategoryKey(categoryKey));
   return fbLogMsg.mustfixThrow(msg);

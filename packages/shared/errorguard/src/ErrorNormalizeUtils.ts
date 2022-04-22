@@ -3,7 +3,7 @@ import { expect, performanceNow, getSimpleHash } from "@farfetchd/utils";
 import { getAll } from "./ErrorXFBDebug";
 import { toReadableMessage } from "./ErrorSerializer";
 
-import { PREVIOUS_FRAME } from "@farfetchd/utils/src/TAALOpcodes";
+import { TAALOpcodes } from "@farfetchd/utils";
 import { NormalizeErrorProps, StackItemProps } from "./types";
 import ErrorMetadata from "./ErrorMetadata";
 
@@ -169,7 +169,7 @@ function normalizeError(error: Error2) {
 
   if (framesToPop != undefined) {
     framesToPop = Math.min(framesToPop, stackItemList.length);
-    while (framesToPop-- > 0) taalOpcodes.unshift(PREVIOUS_FRAME);
+    while (framesToPop-- > 0) taalOpcodes.unshift(TAALOpcodes.PREVIOUS_FRAME);
   }
 
   const messageFormat =

@@ -10,7 +10,8 @@
       "es2017.object",
       "es2017.intl",
       "WebWorker"
-    ]
+    ],
+    "outDir": "dist"
   },
   "include": ["src", "__tests__"],
   "exclude": ["**/node_modules"]

@@ -1,10 +1,6 @@
 import { Error2 } from "./Error2";
 import ErrorSerializer from "./ErrorSerializer";
-import {
-  PREVIOUS_DIR,
-  PREVIOUS_FILE,
-  PREVIOUS_FRAME,
-} from "@farfetchd/utils/src/TAALOpcodes";
+import { TAALOpcodes } from "@farfetchd/utils";
 import ErrorNormalizeUtils from "./ErrorNormalizeUtils";
 import { err } from "./err";
 import ErrorPubSub from "./ErrorPubSub";
@@ -94,9 +90,10 @@ class FBLogMessage {
       error.project = project;
       error.type = type;
       error.loggingSource = "FBLOGGER";
-      error.taalOpcodes = [PREVIOUS_FRAME, PREVIOUS_FRAME].concat(
-        this.taalOpcodes
-      );
+      error.taalOpcodes = [
+        TAALOpcodes.PREVIOUS_FRAME,
+        TAALOpcodes.PREVIOUS_FRAME,
+      ].concat(this.taalOpcodes);
       normalizeErrorObj = ErrorNormalizeUtils.normalizeError(error);
       normalizeErrorObj.name = "FBLogger";
     }
@@ -136,7 +133,7 @@ class FBLogMessage {
     error ||
       ((error = err("mustfixThrow does not support catchingNormalizedError")),
       (error.taalOpcodes = error.taalOpcodes || []),
-      error.taalOpcodes.push(PREVIOUS_FRAME));
+      error.taalOpcodes.push(TAALOpcodes.PREVIOUS_FRAME));
     throw error;
   }
 
@@ -167,17 +164,17 @@ class FBLogMessage {
   }
 
   blameToPreviousFile() {
-    this.taalOpcodes.push(PREVIOUS_FILE);
+    this.taalOpcodes.push(TAALOpcodes.PREVIOUS_FILE);
     return this;
   }
 
   blameToPreviousFrame() {
-    this.taalOpcodes.push(PREVIOUS_FRAME);
+    this.taalOpcodes.push(TAALOpcodes.PREVIOUS_FRAME);
     return this;
   }
 
   blameToPreviousDirectory() {
-    this.taalOpcodes.push(PREVIOUS_DIR);
+    this.taalOpcodes.push(TAALOpcodes.PREVIOUS_DIR);
     return this;
   }
 

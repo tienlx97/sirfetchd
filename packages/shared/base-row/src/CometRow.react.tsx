@@ -2,7 +2,7 @@ import React, { forwardRef, useContext, useMemo } from "react";
 import { CometColumnContext, CometRowContext } from "@farfetchd/context"
 import { CometRowItemReact } from "./CometRowItem.react"
 import { CometColumnItemReact } from "./CometColumnItem.react"
-import { BaseRowReact } from "@farfetchd/base-row"
+import { BaseRowReact } from "./BaseRow.react"
 import stylex from "@ladifire-opensource/stylex";
 import { CometRowReactProps } from "./types";
 

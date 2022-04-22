@@ -1,5 +1,5 @@
 import { Error2 } from "./Error2";
-import { PREVIOUS_FRAME } from "@farfetchd/utils/src/TAALOpcodes";
+import { TAALOpcodes } from "@farfetchd/utils";
 
 function fbErrorLite(msg: string, ...args) {
   const err = new Error2(msg);
@@ -9,7 +9,7 @@ function fbErrorLite(msg: string, ...args) {
     } catch (e) {}
   err.messageFormat = msg;
   err.messageParams = args.map((a) => String(a));
-  err.taalOpcodes = [PREVIOUS_FRAME];
+  err.taalOpcodes = [TAALOpcodes.PREVIOUS_FRAME];
   return err;
 }
 

@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import UserAgent from "@reacttips/useragent"
 import { CometColumnContext, CometColumnProps } from "@farfetchd/context"
-import { BaseViewReact } from "@farfetchd/base-row";
+import { BaseViewReact } from "./BaseView.react"
 import { CometErrorBoundaryReact } from "@farfetchd/errorguard";
 import stylex from "@ladifire-opensource/stylex";
 import { CometColumnItemReactProps } from "./types";
