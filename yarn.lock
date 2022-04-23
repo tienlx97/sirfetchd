@@ -6554,6 +6554,11 @@ rc@^1.0.1, rc@^1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-event@*:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-event/-/react-event-0.0.1.tgz#84a524e780e26edf80bd6c996b5d927d457fcc0c"
+  integrity sha1-hKUk54Dibt+AvWyZa12SfUV/zAw=
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
