@@ -8,10 +8,17 @@ const ReactDOM = require("react-dom");
 // } from "@farfetchd/errorguard/__tests__/commetErrorBoundary.test"
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
+interface OwnProp {
+  clear: () => any
+  setListener: (a, b) => any
+}
+
 const App = () => {
 
+  const ref = React.useRef<OwnProp>()
   const onClick = (e) => {
     console.log(e)
+    console.log(ref.current)
   }
 
   return (
