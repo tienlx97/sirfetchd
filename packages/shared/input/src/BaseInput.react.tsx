@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, memo, forwardRef } from "react";
+import React, { useContext, useMemo, memo, forwardRef, BaseSyntheticEvent, AriaRole } from "react";
 import stylex from '@ladifire-opensource/stylex';
 import { CometContainerPressableContext } from "@farfetchd/context"
 
@@ -19,14 +19,38 @@ const $1 = stylex.create({
 
 const isRTL = false;
 
-interface BaseInputReactProps extends React.HTMLAttributes<HTMLInputElement> {
+interface BaseInputReactProps {
+
+  "aria-autocomplete"?: "none" | "both" | "inline" | "list"
+  "aria-controls"?: string
+  "aria-describedby"?: string
+  "aria-expanded"?: boolean
+  "aria-invalid"?: boolean | "false" | "true" | "grammar" | "spelling"
+  "aria-label"?: string
+
+  autoComplete?: string
+  autoFocus?: boolean
+  checked?: boolean
+  disabled?: boolean
+  id?: string
+  inputMode?: "text" | "none" | "search" | "tel" | "url" | "email" | "numeric" | "decimal"
+  name?: string
+  maxLength?: number
+
   xstyle?: any
   type?: string
   onValueChange?: any
-  onChange?: (e: any) => void,
-  onClick?: (e: any) => void,
-  onBlur?: (e: any) => void,
-  onFocus?: (e: any) => void,
+
+  onChange?: (e: BaseSyntheticEvent) => void,
+  onClick?: (event: BaseSyntheticEvent) => void,
+  onBlur?: (e: BaseSyntheticEvent) => void,
+  onFocus?: (e: BaseSyntheticEvent) => void
+  onMouseUp?: (e: BaseSyntheticEvent) => void
+
+  placeholder?: string
+  role?: AriaRole
+  spellCheck?: boolean
+  tabIndex?: number
 }
 
 const baseInputReact = (props: BaseInputReactProps, ref: any) => {
@@ -40,6 +64,7 @@ const baseInputReact = (props: BaseInputReactProps, ref: any) => {
     ...restProps
   } = props
 
+
   const inputType = type == null ? "text" : type
 
   const inputTypeMemo = useMemo(() => {
@@ -51,23 +76,26 @@ const baseInputReact = (props: BaseInputReactProps, ref: any) => {
     }
   }, [inputType])
 
-  const checkbokOrRadio = inputTypeMemo === "checkbox" || inputTypeMemo === "radio"
+  const checkboxOrRadio = inputTypeMemo === "checkbox" || inputTypeMemo === "radio"
   const isTextarea = inputTypeMemo === "textarea"
   const isContextNotNull = useContext(CometContainerPressableContext) != null
+
 
   const inputProps = Object.assign({
     dir: isRTL ? "rtl" : "ltr"
   }, restProps, {
     className: stylex([$1.root, xstyle, isContextNotNull && $1.zIndex]),
-    onChange: (event: any) => {
-      checkbokOrRadio || onValueChange && onValueChange(event.target.value, event)
+    onChange: (event: BaseSyntheticEvent) => {
+      checkboxOrRadio || onValueChange && onValueChange(event.target.value, event)
       onChange && onChange(event)
     },
-    onClick: (event: any) => {
-      checkbokOrRadio && (onValueChange && onValueChange(event.target.checked, event)),
+    onClick: (event: BaseSyntheticEvent) => {
+      checkboxOrRadio && (onValueChange && onValueChange(event.target.checked, event)),
         onClick && onClick(event)
     }
   })
+
+
 
   return isTextarea ? (
     <textarea
@@ -76,7 +104,9 @@ const baseInputReact = (props: BaseInputReactProps, ref: any) => {
           suppressHydrationWarning: true
         },
         inputProps,
-        ref
+        {
+          ref
+        }
       )}
     />
   ) : (
@@ -100,3 +130,35 @@ baseInputReact.displayName = `${baseInputReact.name} [from BaseInput.react]`
 const BaseInputReact = memo(forwardRef(baseInputReact));
 export default BaseInputReact;
 export { baseInputReact }
+
+/**
+
+aria-autocomplete
+aria-controls
+aria-describedby
+aria-expanded
+aria-invalid
+aria-label
+autoComplete
+autoFocus
+checked
+disabled
+id
+inputMode
+name
+maxLength
+onBlur
+onChange
+onFocus
+onMouseUp
+onValueChange
+placeholder
+role
+spellCheck
+tabIndex
+type
+value
+xstyle
+
+
+ */
