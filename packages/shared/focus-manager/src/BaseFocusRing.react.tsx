@@ -1,6 +1,6 @@
 import React from "react";
 import stylex from "@ladifire-opensource/stylex";
-import FocusWithinHandlerReact from "./FocusWithinHandler.react";
+import FocusWithinHandler_React from "./FocusWithinHandler.react";
 const i = stylex.create({
   focused: {
     outline: "2px solid Highlight",
@@ -38,7 +38,7 @@ const baseFocusRingReact = (a) => {
   const g = k ? j[d] : i.focused;
 
   return (
-    <FocusWithinHandlerReact
+    <FocusWithinHandler_React
       testOnly={testOnly}
       children={(a, c) => {
         return children(!isSuppressFocusRing && a && c ? g : i.unfocused);

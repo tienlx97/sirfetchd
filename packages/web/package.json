@@ -60,6 +60,7 @@
     "@farfetchd/base-row": "*",
     "@farfetchd/errorguard": "*",
     "@farfetchd/utils": "*",
+    "@farfetchd/react-event": "*",
     "@ladifire-opensource/stylex": "^0.1.0-beta.0",
     "@ladifire-opensource/stylex-webpack-plugin": "^0.1.0-beta.0",
     "@types/history": "^5.0.0",

@@ -217,11 +217,11 @@ function useFocusWithin(a, b) {
   return b
 }
 
-const ReactFocusEventReact = {
+const ReactFocusEvent_React = {
   useFocus,
   useFocusWithin
 }
 
-export default ReactFocusEventReact
-export { ReactFocusEventReact }
+export default ReactFocusEvent_React
+export { ReactFocusEvent_React }
 

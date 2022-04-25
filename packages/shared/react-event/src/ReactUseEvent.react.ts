@@ -1,56 +1,77 @@
-import React, { useRef } from "react";
-const ReactDom = require("react-dom");
+import React, { SyntheticEvent, useRef } from "react";
+const ReactDOMComet = require("react-dom");
 import { useLayoutEffect_SAFE_FOR_SSR } from "@farfetchd/experimental";
 
-interface RefProp {
-  clear: () => any;
-  setListener: (a, b) => any;
+interface UseEventHandle {
+  clear: () => void;
+  setListener: (
+    target: EventTarget,
+    callback?: (e: SyntheticEvent<EventTarget>) => void
+  ) => void;
 }
 
-interface OwnProp {
+interface OwnOptions {
   passive?: any;
-  capture?: any;
+  capture?: boolean;
 }
 
-const reactUseEventReact = (eventName: string, props?: OwnProp) => {
-  const ref = useRef<RefProp>();
-  let current = ref.current;
+const reactUseEvent_React = (
+  event: string,
+  options?: OwnOptions
+): UseEventHandle => {
+  const handleRef = useRef<UseEventHandle | undefined>(undefined);
+  let useEventHandle = handleRef.current;
   const _1703328 = true;
-  _1703328 && props && (props.passive = undefined);
+  _1703328 && options && (options.passive = undefined);
 
-  if (current == null) {
-    const unstable_createEventHandle = ReactDom.unstable_createEventHandle(
-      eventName,
-      props
+  if (useEventHandle == null) {
+    const setEventHandle = ReactDOMComet.unstable_createEventHandle(
+      event,
+      options
     );
-    const map = new Map();
-    current = {
-      setListener: (a, b) => {
-        let mapItem = map.get(a);
-        mapItem !== undefined && mapItem();
-        if (b === null) {
-          map["delete"](a);
+
+    const clears = new Map();
+
+    useEventHandle = {
+      setListener: (
+        target: EventTarget,
+        callback?: (syncEvent: SyntheticEvent<EventTarget>) => void
+      ) => {
+        let clear = clears.get(target);
+
+        if (clear != null) {
+          clear();
+        }
+
+        if (callback == null) {
+          clears.delete(target);
           return;
         }
-        mapItem = unstable_createEventHandle(a, b);
-        map.set(a, mapItem);
+
+        clear = setEventHandle(target, callback);
+        clears.set(target, clear);
       },
-      clear: () => {
-        const arrMap = Array.from(map.values());
-        for (let b = 0; b < arrMap.length; b++) arrMap[b]();
-        map.clear();
+
+      clear: (): void => {
+        clears.forEach((clr) => clr());
+        clears.clear();
       },
     };
-    ref.current = current;
+    handleRef.current = useEventHandle;
   }
 
+  // use effect | useLayoutEffect []
   useLayoutEffect_SAFE_FOR_SSR(() => {
     return function () {
-      current != null && current.clear();
-      ref.current = undefined;
+      if (useEventHandle != null) {
+        useEventHandle.clear();
+      }
+      handleRef.current = undefined;
     };
-  }, [current]);
-  return current;
+  }, [useEventHandle]);
+
+  return useEventHandle;
 };
 
-export default reactUseEventReact;
+export default reactUseEvent_React;
+export { reactUseEvent_React as ReactUseEvent_React };

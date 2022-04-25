@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "jdebug": "node --inspect-brk node_modules/.bin/jest --runInBand -i",
+    "jdebug": "node --inspect-brk node_modules/.bin/jest --runInBand --detectOpenHandles",
     "ts": "ts-node  ./packages/shared/fblogger/__tests__/fblogger.test.ts",
     "start": "cd ./packages/web && yarn start"
   },

@@ -1,4 +1,4 @@
-import ReactFocusEventReact from "./ReactFocusEvent.react";
+import ReactFocusEvent_React from "./ReactFocusEvent.react";
 import React, {
   useMemo,
   useRef,
@@ -24,7 +24,7 @@ const focusWithinHandler_React = (props: OwnProps) => {
   const ref = useRef(null);
   const [focus, setFocus] = useState((testOnly && testOnly.focus) != null ? testOnly : false);
   const [focusVisible, setFocusVisible] = useState((testOnly && testOnly.focusVisible) != null ? testOnly : false);
-  const newRef = ReactFocusEventReact.useFocusWithin(ref, useMemo(function () {
+  const newRef = ReactFocusEvent_React.useFocusWithin(ref, useMemo(function () {
     return {
       onFocusWithin: (a) => {
         onFocusWithin && !focus && onFocusWithin(a)
@@ -54,6 +54,6 @@ const focusWithinHandler_React = (props: OwnProps) => {
 }
 
 focusWithinHandler_React.displayName = `${focusWithinHandler_React.name} [from FocusWithinHandler.react]`;
-const FocusWithinHandlerReact = focusWithinHandler_React
-export default FocusWithinHandlerReact
-export { FocusWithinHandlerReact }
+const FocusWithinHandler_React = focusWithinHandler_React
+export default FocusWithinHandler_React
+export { FocusWithinHandler_React }

@@ -1,11 +1,15 @@
-function hasEventHookPropagationStopped(a, b) {
-  a = a._stopEventHookPropagation;
-  return a !== undefined && a[b];
+function hasEventHookPropagationStopped(event, eventName) {
+  const _stopEventHookPropagation = event._stopEventHookPropagation;
+  return (
+    _stopEventHookPropagation !== undefined &&
+    _stopEventHookPropagation[eventName]
+  );
 }
-function stopEventHookPropagation(a, b) {
-  let c = a._stopEventHookPropagation;
-  c || (c = a._stopEventHookPropagation = {});
-  c[b] = !0;
+function stopEventHookPropagation(event, eventName) {
+  let _stopEventHookPropagation = event._stopEventHookPropagation;
+  _stopEventHookPropagation ||
+    (_stopEventHookPropagation = event._stopEventHookPropagation = {});
+  _stopEventHookPropagation[eventName] = true;
 }
 
 const ReactEventHookPropagation = {

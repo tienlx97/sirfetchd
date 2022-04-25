@@ -8,7 +8,7 @@ const canUseDOM = !!(
   window.document.createElement
 );
 
-const isInWorker = typeof WorkerGlobalScope === "function";
+// const isInWorker = typeof WorkerGlobalScope === "function";
 
 const executionEnvironment = {
   canUseDOM,
@@ -16,8 +16,8 @@ const executionEnvironment = {
   canUseEventListeners:
     canUseDOM && !!(window.addEventListener /* || window.attachEvent*/),
   canUseViewport: canUseDOM && !!window.screen,
-  isInWorker,
-  isInBrowser: canUseDOM || isInWorker,
+  isInWorker: true,
+  isInBrowser: canUseDOM || /*isInWorker*/ true,
 };
 
 export default executionEnvironment;

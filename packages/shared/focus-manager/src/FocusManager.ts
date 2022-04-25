@@ -33,10 +33,10 @@ function m(a: any) {
     const e = d.offsetHeight;
     d = d.offsetWidth;
     (e < a.scrollHeight || d < a.scrollWidth) &&
-      b.push([a, a.scrollTop, a.scrollLeft]);
+      b.push([a as never, a.scrollTop as never, a.scrollLeft as never]);
     a = a.parentElement;
   }
-  c && b.push([c, c.scrollTop, c.scrollLeft]);
+  c && b.push([c as never, c.scrollTop as never, c.scrollLeft as never]);
   return b;
 }
 function n(a) {

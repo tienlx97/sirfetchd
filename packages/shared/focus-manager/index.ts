@@ -6,3 +6,4 @@ ReactEventHookPropagation
 "ReactUseEvent.react", ["ReactDOMComet", "gkx", "react", "useLayoutEffect_SAFE_FOR_SSR"]
 // checkPassiveEventsSupported
 */
+export { default as BaseFocusRing_React } from "./src/BaseFocusRing.react";
