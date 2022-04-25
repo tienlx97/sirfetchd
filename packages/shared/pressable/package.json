@@ -1,16 +1,10 @@
 {
-  "name": "@farfetchd/react-event",
+  "name": "@farfetchd/pressable",
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
   "dependencies": {
-    "@farfetchd/context": "*",
-    "react": "*",
-    "react-dom": "*",
-    "@farfetchd/experimental": "*",
-    "@ladifire-opensource/stylex": "^0.1.0-beta.0",
-    "@farfetchd/dom-event-testing-library": "*",
-    "scheduler": "^0.21.0"
+    "@farfetchd/react-event": "*"
   },
   "scripts": {
     "test": "jest"

@@ -123,7 +123,7 @@ type UseFocusOptions = {
   onFocusVisibleChange?: (e: boolean) => void,
 }
 
-function useFocus(focusTargetRef: { current: undefined | Node }, props: UseFocusOptions) {
+function useFocus(focusTargetRef: { current: null | Node }, props: UseFocusOptions) {
 
   const {
     disabled,
