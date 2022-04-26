@@ -7,4 +7,5 @@ module.exports = {
   ],
   testEnvironment: "node",
   testMatch: ["*.spec.ts", "*.spec.tsx"],
+  setupFiles: ["<rootDir>/env-setup.ts"],
 };

@@ -7,44 +7,12 @@ const R = require("react");
 // import {
 //   CometErrorBoundary_Test1
 // } from "@farfetchd/errorguard/__tests__/commetErrorBoundary.test"
+
+import { Unstable_Scope_Debug } from "@farfetchd/react-event/__debugs__/useScope"
 import { ReactFocusEvent_React } from "@farfetchd/react-event"
+
 const root = ReactDOMComet.createRoot(document.getElementById("root")!);
 
-
-// interface OwnProp {
-//   clear: () => any
-//   setListener: (a, b) => any
-// }
-
-// const App = () => {
-
-//   const testScopeQuery = (type, props) => true;
-//   const TestScope = R.unstable_Scope;
-//   const scopeRef = R.createRef();
-//   const divRef = R.createRef();
-//   const spanRef = R.createRef();
-//   const aRef = R.createRef();
-
-//   function Test({ toggle }) {
-//     return toggle ? (
-//       <TestScope ref={scopeRef}>
-//         <div ref={divRef}>DIV</div>
-//         <span ref={spanRef}>SPAN</span>
-//         <a ref={aRef}>A</a>
-//       </TestScope>
-//     ) : (
-//       <TestScope ref={scopeRef}>
-//         <a ref={aRef}>A</a>
-//         <div ref={divRef}>DIV</div>
-//         <span ref={spanRef}>SPAN</span>
-//       </TestScope>
-//     );
-//   }
-
-//   return (
-//     <Test toggle={true} />
-//   )
-// }
 
 const OnFocus_Test = () => {
 
@@ -69,6 +37,6 @@ const OnFocus_Test = () => {
   )
 }
 
-root.render(<OnFocus_Test />);
+root.render(<Unstable_Scope_Debug toggle={true} />);
 
 

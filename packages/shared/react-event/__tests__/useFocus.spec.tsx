@@ -34,7 +34,7 @@ describe.each(table)(`useFocus hasPointerEvents=%s`, (hasPointerEvents) => {
   });
 
   afterEach(() => {
-    ReactDOM.render(null, container);
+    ReactDOM.createRoot(container).render(null);
     document.body.removeChild(container);
     container = null;
   });
@@ -54,7 +54,7 @@ describe.each(table)(`useFocus hasPointerEvents=%s`, (hasPointerEvents) => {
         });
         return <div ref={ref} />;
       };
-      ReactDOM.render(<Component />, container);
+      ReactDOM.createRoot(container).render(<Component />);
       Scheduler.unstable_flushAll();
     };
 
