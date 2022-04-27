@@ -150,7 +150,8 @@ function useFocus(focusTargetRef: { current: null | Node }, props: UseFocusOptio
       // Handle focus visible
       setFocusVisibleListeners(
         focusVisibleHandles,
-        focusTarget, isFocusVisible => {
+        focusTarget,
+        isFocusVisible => {
           if (state.isFocused && state.isFocusVisible !== isFocusVisible) {
             state.isFocusVisible = isFocusVisible
             if (onFocusVisibleChange) {
@@ -196,13 +197,14 @@ function useFocus(focusTargetRef: { current: null | Node }, props: UseFocusOptio
 
         if (state.isFocused) {
           state.isFocused = false
-          state.isFocusVisible = isGlobalFocusVisible;
           if (onBlur) {
             onBlur(event)
           }
           if (onFocusChange) {
             onFocusChange(false)
           }
+          state.isFocusVisible && onFocusVisibleChange && onFocusVisibleChange(false)
+          state.isFocusVisible = isGlobalFocusVisible;
         }
       })
     }
@@ -224,13 +226,13 @@ function useFocus(focusTargetRef: { current: null | Node }, props: UseFocusOptio
     return function () {
       if (focusTargetRef.current == null && state != null && state.isFocused) {
         state.isFocused = false;
-        const focusEvent = new window.FocusEvent("blur");
-        Object.defineProperty(focusEvent, "target", {
+        const blurEvent = new window.FocusEvent("blur");
+        Object.defineProperty(blurEvent, "target", {
           value: focusTarget
         });
 
         if (onBlur) {
-          onBlur(focusEvent as any)
+          onBlur(blurEvent as any)
         }
 
         if (onFocusChange) {
@@ -262,10 +264,7 @@ type UseFocusWithinOptions = {
 
 function useFocusWithin<T>(
   focusWithinTargetRef: ((focusWithinTarget?: T) => void) | { current?: T },
-  props: UseFocusWithinOptions
-) {
-
-  const {
+  {
     disabled,
     onAfterBlurWithin,
     onBeforeBlurWithin,
@@ -273,7 +272,9 @@ function useFocusWithin<T>(
     onFocusWithin,
     onFocusWithinChange,
     onFocusWithinVisibleChange
-  } = props;
+  }: UseFocusWithinOptions
+) {
+
 
   // Setup controlled state for this useFocus hook
   const stateRef = useRef<undefined | { isFocused: boolean, isFocusVisible: boolean }>({
@@ -325,7 +326,9 @@ function useFocusWithin<T>(
           return;
         }
 
-        if (!state.isFocused || state.isFocused) {
+
+
+        if (!state.isFocused /*|| state.isFocused*/) {
           state.isFocused = true
           state.isFocusVisible = isGlobalFocusVisible
           if (onFocusWithinChange) {
@@ -388,12 +391,15 @@ function useFocusWithin<T>(
         }
         if (onBeforeBlurWithin) {
           onBeforeBlurWithin(event)
-          afterBlurHandle.setListener(document, (afterBlurEvent: FocusEvent) => {
-            if (onAfterBlurWithin) {
-              onAfterBlurWithin(afterBlurEvent);
-            }
-            afterBlurHandle.setListener(document, undefined)
-          })
+          afterBlurHandle.setListener(
+            document,
+            (afterBlurEvent: FocusEvent) => {
+              if (onAfterBlurWithin) {
+                onAfterBlurWithin(afterBlurEvent);
+              }
+              // Clear listener on document
+              afterBlurHandle.setListener(document, undefined)
+            })
         }
       })
     }
@@ -425,5 +431,8 @@ const ReactFocusEvent_React = {
 }
 
 export default ReactFocusEvent_React
-export { ReactFocusEvent_React }
+export {
+  useFocus,
+  useFocusWithin
+}
 

@@ -9,34 +9,12 @@ const R = require("react");
 // } from "@farfetchd/errorguard/__tests__/commetErrorBoundary.test"
 
 import { Unstable_Scope_Debug } from "@farfetchd/react-event/__debugs__/useScope"
-import { ReactFocusEvent_React } from "@farfetchd/react-event"
+import { UseFocus_disabled, UseFocus_onBlur, UseFocus_onFocus } from "@farfetchd/react-event/__debugs__/useFocus"
 
 const root = ReactDOMComet.createRoot(document.getElementById("root")!);
 
 
-const OnFocus_Test = () => {
-
-  const onFocus = (e) => {
-    console.log(Date.now().toString())
-  }
-
-  const ref = React.createRef<HTMLInputElement>();
-  const innerRef = React.createRef<HTMLAnchorElement>();
-
-  ReactFocusEvent_React.useFocus(ref, {
-    onFocus
-  })
-
-  return (
-    <>
-      {/* <div ref={ref}>
-       <a ref={innerRef} />
-     </div> */}
-      <input ref={ref} />
-    </>
-  )
-}
-
-root.render(<Unstable_Scope_Debug toggle={true} />);
-
-
+// root.render(<Unstable_Scope_Debug toggle={true} />);
+// root.render(<UseFocus_disabled  />);
+// root.render(<UseFocus_onBlur />);
+root.render(<UseFocus_onFocus example={1} />);

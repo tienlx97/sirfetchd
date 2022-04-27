@@ -19,7 +19,7 @@ function createEvent(type, event, target) {
   };
 }
 
-const k = {
+const useEventProps = {
   passive: true,
 };
 
@@ -43,18 +43,27 @@ type UseHoverOptions = {
   onHoverChange?: (value: boolean) => void;
 };
 
-function useHover(hoverTargetRef: any, props: UseHoverOptions) {
-  const { disabled, onHoverStart, onHoverMove, onHoverEnd, onHoverChange } =
-    props;
-
-  const touchstartHandle = ReactUseEvent_React("touchstart", k);
-  const mouseoverHandle = ReactUseEvent_React("mouseover", k);
-  const mouseoutHandle = ReactUseEvent_React("mouseout", k);
-  const mousemoveHandle = ReactUseEvent_React("mousemove", k);
-  const pointeroverHandle = ReactUseEvent_React("pointerover", k);
-  const pointeroutHandle = ReactUseEvent_React("pointerout", k);
-  const pointermoveHandle = ReactUseEvent_React("pointermove", k);
-  const pointercancelHandle = ReactUseEvent_React("pointercancel", k);
+function useHover(
+  hoverTargetRef: { current: null | any },
+  {
+    disabled,
+    onHoverStart,
+    onHoverMove,
+    onHoverEnd,
+    onHoverChange,
+  }: UseHoverOptions
+) {
+  const touchstartHandle = ReactUseEvent_React("touchstart", useEventProps);
+  const mouseoverHandle = ReactUseEvent_React("mouseover", useEventProps);
+  const mouseoutHandle = ReactUseEvent_React("mouseout", useEventProps);
+  const mousemoveHandle = ReactUseEvent_React("mousemove", useEventProps);
+  const pointeroverHandle = ReactUseEvent_React("pointerover", useEventProps);
+  const pointeroutHandle = ReactUseEvent_React("pointerout", useEventProps);
+  const pointermoveHandle = ReactUseEvent_React("pointermove", useEventProps);
+  const pointercancelHandle = ReactUseEvent_React(
+    "pointercancel",
+    useEventProps
+  );
 
   const stateRef = useRef<
     undefined | { isHovered: boolean; isTouched: boolean }
@@ -129,9 +138,9 @@ function useHover(hoverTargetRef: any, props: UseHoverOptions) {
       const pointercancelCallback = (event) => {
         state.isTouched = false;
         if (ReactEventHelpers.hasPointerEvents) {
-          pointermoveHandle.setListener(document, undefined),
-            pointercancelHandle.setListener(document, undefined),
-            pointeroutHandle.setListener(document, undefined);
+          pointermoveHandle.setListener(document, undefined);
+          pointercancelHandle.setListener(document, undefined);
+          pointeroutHandle.setListener(document, undefined);
         } else {
           mouseoutHandle.setListener(document, undefined);
         }

@@ -1,23 +1,17 @@
 import ReactFocusEvent_React from '../src/ReactFocusEvent.react';
-
+import { render } from '@testing-library/react'
+import React, { createRef } from "react"
 const DomTestingLib = require("@farfetchd/dom-event-testing-library");
+const Scheduler = require("scheduler")
 
-let React;
-let ReactDOM;
 let useFocus;
-let Scheduler;
 
 const { createEventTarget, setPointerEvent } = DomTestingLib;
 
 function initializeModules(hasPointerEvents) {
   setPointerEvent(hasPointerEvents);
   jest.resetModules();
-  React = require("react");
-  ReactDOM = require("react-dom");
-  Scheduler = require("scheduler");
 
-  // TODO: This import throws outside of experimental mode. Figure out better
-  // strategy for gated imports.
   useFocus = ReactFocusEvent_React.useFocus;
 }
 
@@ -25,47 +19,78 @@ const forcePointerEvents = true;
 const table = [[forcePointerEvents], [!forcePointerEvents]];
 
 describe.each(table)(`useFocus hasPointerEvents=%s`, (hasPointerEvents) => {
-  let container;
 
   beforeEach(() => {
     initializeModules(hasPointerEvents);
-    container = document.createElement("div");
-    document.body.appendChild(container);
   });
 
-  afterEach(() => {
-    ReactDOM.createRoot(container).render(null);
-    document.body.removeChild(container);
-    container = null;
-  });
+  // describe("disabled", () => {
+  //   let onBlur, onFocus, ref;
 
-  describe("disabled", () => {
-    let onBlur, onFocus, ref;
+  //   const componentInit = () => {
+  //     onBlur = jest.fn();
+  //     onFocus = jest.fn();
+  //     ref = React.createRef();
+  //     const Component = () => {
+  //       useFocus(ref, {
+  //         disabled: true,
+  //         onBlur,
+  //         onFocus,
+  //       });
+  //       return <div ref={ref} />;
+  //     };
+  //     render(<Component />);
+  //     Scheduler.unstable_flushAll();
+  //   };
 
+  //   // @gate www
+  //   it("does not call callbacks", () => {
+  //     componentInit();
+  //     const target = createEventTarget(ref.current);
+  //     target.focus();
+  //     target.blur();
+  //     expect(onFocus).not.toBeCalled();
+  //     expect(onBlur).not.toBeCalled();
+  //   });
+  // });
+
+
+  describe('onFocus', () => {
+    const onFocus = jest.fn();
+    const ref = createRef<HTMLDivElement>();
+    const innerRef = createRef<HTMLAnchorElement>();
     const componentInit = () => {
-      onBlur = jest.fn();
-      onFocus = jest.fn();
-      ref = React.createRef();
+
+
       const Component = () => {
         useFocus(ref, {
-          disabled: true,
-          onBlur,
           onFocus,
         });
-        return <div ref={ref} />;
+        return (
+          <div ref={ref}>
+            <a ref={innerRef} />
+          </div>
+        );
       };
-      ReactDOM.createRoot(container).render(<Component />);
+      render(<Component />);
       Scheduler.unstable_flushAll();
     };
 
     // @gate www
-    it("does not call callbacks", () => {
+    it('is called after "focus" event', () => {
       componentInit();
       const target = createEventTarget(ref.current);
       target.focus();
-      target.blur();
+      expect(onFocus).toHaveBeenCalledTimes(1);
+    });
+
+    // @gate www
+    it('is not called if descendants of target receive focus', () => {
+      componentInit();
+      const target = createEventTarget(innerRef.current);
+      target.focus();
       expect(onFocus).not.toBeCalled();
-      expect(onBlur).not.toBeCalled();
     });
   });
+
 });

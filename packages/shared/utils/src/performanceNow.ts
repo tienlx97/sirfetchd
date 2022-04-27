@@ -10,12 +10,7 @@ function performanceNow(): number {
   else {
     // unsupport window.performance
     // do it manually
-    let startTime: Date;
-    if (process.env.NODE_ENV === "__TESTS__") {
-      startTime = new Date();
-    } else {
-      startTime = window._cstart;
-    }
+    const startTime = window._cstart;
 
     const currentTime = Date.now();
 
