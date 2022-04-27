@@ -12,4 +12,15 @@ interface CometRowProps {
 
 interface CometContainerPressableProp {}
 
-export { CometColumnProps, CometRowProps, CometContainerPressableProp };
+interface PressableGroupContextProps {
+  register?: any;
+  onTouchStart?: any;
+  unRegister?: any;
+}
+
+export {
+  CometColumnProps,
+  CometRowProps,
+  CometContainerPressableProp,
+  PressableGroupContextProps,
+};

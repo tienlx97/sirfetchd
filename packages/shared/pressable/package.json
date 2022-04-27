@@ -4,7 +4,8 @@
   "main": "index.ts",
   "license": "MIT",
   "dependencies": {
-    "@farfetchd/react-event": "*"
+    "@farfetchd/react-event": "*",
+    "@reacttips/useragent": "^1.0.1"
   },
   "scripts": {
     "test": "jest"

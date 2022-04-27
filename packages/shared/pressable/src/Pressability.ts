@@ -6,8 +6,9 @@ import {
   ReactContextMenuEvent_React,
 } from "@farfetchd/react-event";
 
-function usePressability(targetRef, props) {
-  const {
+function usePressability(
+  targetRef,
+  {
     disabled,
     onBlur,
     onContextMenu,
@@ -23,8 +24,8 @@ function usePressability(targetRef, props) {
     onPressMove,
     onPressStart,
     preventContextMenu,
-  } = props;
-
+  }: any
+) {
   // useHover
   ReactHoverEvent_React(targetRef, {
     disabled: disabled,
