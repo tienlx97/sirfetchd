@@ -18,7 +18,7 @@ const _5403 = false;
 const isSafari =
   UserAgent.isBrowser("Safari") || UserAgent.isBrowser("Mobile Safari");
 const items = ["menuitem", "tab", "none"];
-const p = {
+const tags = {
   article: "article",
   banner: "header",
   complementary: "aside",
@@ -41,7 +41,7 @@ function createJsxComp(accessibilityRole, linkk) {
   if (items.includes(accessibilityRole) && linkk != null && linkk.url != null) {
     htmlTag = "a";
   } else if (accessibilityRole != null) {
-    linkk = p[accessibilityRole];
+    linkk = tags[accessibilityRole];
     if (linkk != null) {
       htmlTag = linkk;
     }
@@ -316,13 +316,13 @@ function pressable_React({
     onBlur: onBlur,
     onContextMenu: onContextMenu,
     onFocus: onFocus,
-    onFocusChange: v(setState1, onFocusChange),
-    onFocusVisibleChange: v(setState2, onFocusVisibleChange),
-    onHoverChange: v(setState3, onHoverChange),
+    onFocusChange: callbackChangeEvent(setState1, onFocusChange),
+    onFocusVisibleChange: callbackChangeEvent(setState2, onFocusVisibleChange),
+    onHoverChange: callbackChangeEvent(setState3, onHoverChange),
     onHoverEnd: onHoverEnd,
     onHoverMove: onHoverMove,
     onHoverStart: onHoverStart,
-    onPressChange: v(setState4, onPressChange),
+    onPressChange: callbackChangeEvent(setState4, onPressChange),
     onPressEnd: onPressEnd,
     onPressMove: onPressMove,
     onPressStart: onPressStart,
@@ -536,13 +536,13 @@ function pressable_React({
   );
 }
 
-function v(a, b) {
+function callbackChangeEvent(setState, changeCallback) {
   return useCallback(
-    function (c) {
-      a(c);
-      b && b(c);
+    (boolValue) => {
+      setState(boolValue);
+      changeCallback && changeCallback(boolValue);
     },
-    [b, a]
+    [changeCallback, setState]
   );
 }
 

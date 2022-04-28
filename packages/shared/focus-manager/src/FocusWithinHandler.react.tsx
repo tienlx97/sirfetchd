@@ -1,4 +1,4 @@
-import ReactFocusEvent_React from "./ReactFocusEvent.react";
+import { ReactFocusEvent_React } from "@farfetchd/react-event";
 import React, {
   useMemo,
   useRef,
